@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 void	handle_integer(char *input_string, int i, t_struct *flags)
 {
@@ -97,7 +98,16 @@ void	handle_space(char *input_string, int i, t_struct *flags)
 
 void	handle_hash(char *input_string, int i, t_struct *flags)
 {
-	//code here
+	if (flags->type == 'x')
+	{
+		flags->str_args = ft_strjoin("0x", flags->str_args);
+	}
+	else if (flags->type == 'X')
+	{
+		flags->str_args = ft_strjoin("0X", flags->str_args);
+	}
+	else
+		flags->str_args = ft_strjoin("0", flags->str_args);
 }
 
 void	handle_backslash(char *input_string, int i, t_struct *flags)
@@ -112,7 +122,7 @@ void	handle_asterisk(char *input_string, int i, t_struct *flags)
 
 void	handle_h(char *input_string, int i, t_struct *flags)
 {
-	if (flags->type == '1')
+	if (flags->type == 'd' || flags->type == 'i')
 		flags->str_args = ft_itoa((short)va_arg(flags->args, int));
 	else
 		flags->str_args = ft_itoa((unsigned short)va_arg(flags->args, int));
@@ -120,7 +130,7 @@ void	handle_h(char *input_string, int i, t_struct *flags)
 
 void	handle_hh(char *input_string, int i, t_struct *flags)
 {
-	if (flags->type == '1')
+	if (flags->type == 'd' || flags->type == 'i')
 		flags->str_args = ft_itoa((signed char)va_arg(flags->args, int));
 	else
 		flags->str_args = ft_itoa((unsigned char)va_arg(flags->args, int));
@@ -128,7 +138,7 @@ void	handle_hh(char *input_string, int i, t_struct *flags)
 
 void	handle_l(char *input_string, int i, t_struct *flags)
 {
-	if (flags->type == '1')
+	if (flags->type == 'd' || flags->type == 'i')
 		flags->str_args = ft_itoa(va_arg(flags->args, long));
 	else
 		flags->str_args = ft_itoa(va_arg(flags->args, unsigned long));
@@ -136,7 +146,7 @@ void	handle_l(char *input_string, int i, t_struct *flags)
 
 void	handle_ll(char *input_string, int i, t_struct *flags)
 {
-	if (flags->type == '1')
+	if (flags->type == 'd' || flags->type == 'i')
 		flags->str_args = ft_itoa(va_arg(flags->args, long long));
 	else
 		flags->str_args = ft_itoa(va_arg(flags->args, unsigned long long));
@@ -144,7 +154,7 @@ void	handle_ll(char *input_string, int i, t_struct *flags)
 
 void	handle_j(char *input_string, int i, t_struct *flags)
 {
-	if (flags->type == '1')
+	if (flags->type == 'd' || flags->type == 'i')
 		flags->str_args = ft_itoa(va_arg(flags->args, intmax_t));
 	else
 		flags->str_args = ft_itoa(va_arg(flags->args, uintmax_t));
@@ -152,7 +162,7 @@ void	handle_j(char *input_string, int i, t_struct *flags)
 
 void	handle_z(char *input_string, int i, t_struct *flags)
 {
-	if (flags->type == '1')
+	if (flags->type == 'd' || flags->type == 'i')
 		flags->str_args = ft_itoa(va_arg(flags->args, size_t));
 	else
 		flags->str_args = ft_itoa(va_arg(flags->args, size_t));
@@ -164,13 +174,27 @@ void	handle_unsigned(char *input_string, int i, t_struct *flags)
 }
 
 void	handle_octal(char *input_string, int i, t_struct *flags)
-{
-	//code here
+{		
+	int		j;
+	j = -1;
+	if (input_string[i] == 'O')
+	{
+		while(flags->str_args[++j])
+			flags->str_args[j] = ft_toupper(flags->str_args[j]);
+	}
+	ft_putstr(flags->str_args);
 }
 
-void	handle_hexa(char *input_string, int i, t_struct *flags)
+void	handle_hex(char *input_string, int i, t_struct *flags)
 {
-	//code here
+	int		j;
+	j = -1;
+	if (input_string[i] == 'X')
+	{
+		while(flags->str_args[++j])
+			flags->str_args[j] = ft_toupper(flags->str_args[j]);
+	}
+	ft_putstr(flags->str_args);
 }
 
 void	handle_float(char *input_string, int i, t_struct *flags)
@@ -185,7 +209,17 @@ void	handle_character(char *input_string, int i, t_struct *flags)
 
 void	handle_pointer(char *input_string, int i, t_struct *flags)
 {
-	//code here
+/*
+    int		i;
+    uintptr_t	p;
+    
+    p = (uintptr_t)p0;
+
+    write_char('0'); 
+    write_char('x');
+    for(i = (sizeof(p) << 3) - 4; i>=0; i -= 4) {
+        write_char(hex_digit((p >> i) & 0xf));
+    } */
 }
 
 void	handle_wcharacter(char *input_string, int i, t_struct *flags)

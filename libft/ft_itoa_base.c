@@ -36,7 +36,7 @@ char	*ft_itoa_base(long long int nb, int base)
 	while (nb > 0)
 	{
 		temp = nb % base;
-		if (temp > base - 1)
+		if (temp > 9)
 			res[i++] = 'a' + (temp - 10);
 		else
 			res[i++] = temp + '0';

@@ -36,12 +36,12 @@ create_j_table jump_table[25] =
 	handle_integer,         /* for 'd', 'i' */
 	handle_unsigned,        /* for 'u' */
 	handle_octal,           /* for 'o' */
-	handle_hexa,            /* for 'X', 'x' */
-	//strings start 19
+	handle_hex,             /* for 'X', 'x' */
+	handle_pointer,         /* for 'p' */
+	//strings start 20
 	handle_string,          /* for 's', 'S' */
 	handle_percent,         /* for '%' */
 	handle_character,       /* for 'c' */
-	handle_pointer,         /* for 'p' */
 	handle_wcharacter,      /* for 'C' */
  };
 
@@ -50,20 +50,14 @@ void	check_length_mod(char *input_string, int i, t_struct *flags)
 	char	modifier;
 
 	modifier = 0;
-	if (input_string[i] == 'd' || input_string[i] == 'i')
-		flags->type = '1';
+	if (input_string[i] == 'x' || input_string[i] == 'X')
+		flags->base = 16;
 	else
-	{
-		flags->type = '0';
-		if (input_string[i] == 'x' || input_string[i] == 'X')
-			flags->base = 16;
-		else
-			flags->base = 8;
-	}
+		flags->base = 8;
 	if (ft_isalpha(input_string[--i]))
 		modifier = input_string[i];
 	if (ft_isalpha(input_string[--i]))
-		modifier = input_string[i] - 32;
+		modifier = input_string[i];
 	if (modifier)
 		jump_table[modifier - 32](input_string, i, flags);
 	else
@@ -74,9 +68,10 @@ void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
 {
 	while (table_index[input_string[i] - 32] < 14)
 		i++;
-	if (table_index[input_string[i] - 32] < 19)
+	flags->type = input_string[i];
+	if (table_index[input_string[i] - 32] < 20)
 		check_length_mod(input_string, i, flags);
-	else if (table_index[input_string[i] - 32] == 20) //%%
+	else if (table_index[input_string[i] - 32] == 21) //%%
 		return ;
 	else
 		flags->str_args = va_arg(flags->args, char *);
@@ -110,11 +105,12 @@ t_struct	*init_struct(void)
 	flags->minus = '0';
 	flags->base = 10;
 	flags->type = '0';
+	flags->chars_printed = 0;
 	flags->str_args = NULL;
 	return (flags);
 }
 
-void	ft_printf(char *input_string, ...)
+int	ft_printf(char *input_string, ...)
 {
 	int			i;
 	t_struct	*flags;
@@ -131,7 +127,11 @@ void	ft_printf(char *input_string, ...)
 			i = handle_perc(input_string, i, flags);
 		}
 		else
+		{
+			flags->chars_printed++;
 			write(1, &input_string[i], 1);
+		}
 	}
 	va_end(flags->args);
+	return (flags->chars_printed);
 }

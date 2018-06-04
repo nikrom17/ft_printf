@@ -15,14 +15,13 @@
 
 int		main(void) 
 {
-	int		num = 5;
-	//char	*string = "did it on `em";
+	//int		num = 11;
+	char	*string = "did it on `em";
 
-	/*
-	ft_printf("%0+10d\n", num);
-	printf("%0+10d\n", num);
-	ft_printf("MEEE - String value: %.3s\n",string);
-	printf("THEM - String value: %s\n",string); */
+	ft_printf("5\n");
+	printf("5\nn");
+	ft_printf("MEEE - String value: %s\n",string);
+	printf("THEM - String value: %s\n",string);
 
-	printf("%s\n", ft_itoa_base(num, 2));
+	//printf("%s\n", ft_itoa_base(num, 2));
 }

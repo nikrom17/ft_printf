@@ -25,13 +25,14 @@ typedef struct		s_flags
 	char			type;
 	char			*str_args;
 	va_list			args;
+	int			chars_printed;
 }					t_struct;
 
 typedef void (*create_j_table)(char *, int, t_struct *);
 
 static const int table_index[] =
 {
-  /* ' ' */  1,            0,            0, /* '#' */  4,
+  /* ' ' */  1,            0,            0, /* '#' */  0,
              0, /* '%' */ 18,            0, /* '\''*/  6,
              0,            0, /* '*' */  7, /* '+' */  4,
              0, /* '-' */  5, /* '.' */  3,            0,
@@ -42,24 +43,24 @@ static const int table_index[] =
              0, /* 'A' */  0,            0, /* 'C' */  0,
              0, /* 'E' */  0, /* F */    0, /* 'G' */  0,
   /* 'H' */ 10, /* 'I' */  0,            0,            0,
-  /* 'L' */ 12,            0,            0,            0,
+  /* 'L' */ 12,            0,            0, /* 'O' */ 17,
              0,            0,            0, /* 'S' */  0,
              0,            0,            0,            0,
-  /* 'X' */  0,            0, /* 'Z' */  0,            0,
+  /* 'X' */ 18,            0, /* 'Z' */  0,            0,
              0,            0,            0,            0,
              0, /* 'a' */  0,            0, /* 'c' */  0,
   /* 'd' */ 15, /* 'e' */  0, /* 'f' */  0, /* 'g' */  0,
   /* 'h' */  9, /* 'i' */ 15, /* 'j' */ 13,            0,
-  /* 'l' */ 11, /* 'm' */  0, /* 'n' */  0, /* 'o' */  0,
-  /* 'p' */  0, /* 'q' */  0,            0, /* 's' */ 17,
+  /* 'l' */ 11, /* 'm' */  0, /* 'n' */  0, /* 'o' */ 17,
+  /* 'p' */  0, /* 'q' */  0,            0, /* 's' */ 19,
   /* 't' */  0, /* 'u' */  0,            0,            0,
-  /* 'x' */  0,            0, /* 'z' */ 14,            0,
+  /* 'x' */ 18,            0, /* 'z' */ 14,            0,
              0,            0,            0,            0,
              0
 };
 
-void	ft_printf(char *input_string, ...);
-int		handle_perc(char *input_string, int i, t_struct *flags);
+int	ft_printf(char *input_string, ...);
+int	handle_perc(char *input_string, int i, t_struct *flags);
 void	find_conversion_specifier(char *input_string, int i, t_struct *flags);
 void	handle_space(char *input_string, int i, t_struct *flags);
 void	handle_percent(char *input_string, int i, t_struct *flags);
@@ -80,7 +81,7 @@ void	handle_z(char *input_string, int i, t_struct *flags);
 void	handle_integer(char *input_string, int i, t_struct *flags);
 void	handle_unsigned(char *input_string, int i, t_struct *flags);
 void	handle_octal(char *input_string, int i, t_struct *flags);
-void	handle_hexa(char *input_string, int i, t_struct *flags);
+void	handle_hex(char *input_string, int i, t_struct *flags);
 void	handle_float(char *input_string, int i, t_struct *flags);
 void	handle_character(char *input_string, int i, t_struct *flags);
 void	handle_string(char *input_string, int i, t_struct *flags);

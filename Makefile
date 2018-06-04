@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 #NAME = no name needed because ft_printf is a function
-NAME_LIB = libftprintf.a
+NAME = libftprintf.a
 CC = gcc
 HEADERS = libft/includes
 FLAGS = -Wall -Werror -c
@@ -21,20 +21,22 @@ DEPENDENCY = 	ft_printf.c \
 				handle_functions.c
 OBJ = *.o
 
-all: $(NAME_LIB)
+all: $(NAME)
 
-$(NAME_LIB): $(DEPENDENCY)
+$(NAME): $(DEPENDENCY)
 	make -C libft/
-	cp libft/libft.a ./$(NAME_LIB)
+	cp libft/libft.a ./$(NAME)
 	$(CC) $(OPTION) $(FLAGS) $(DEPENDENCY)
-	ar rc $(NAME_LIB) $(OBJ)
-	ranlib $(NAME_LIB)
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 	gcc main.c -Wall -Werror -g libftprintf.a -I ./libft/includes
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) libft/$(OBJ)
 
 fclean:
-	rm -f $(OBJ) $(NAME_LIB)
+	rm -f $(OBJ) $(NAME) libft/$(OBJ) libft/libft.a
+
+
 
 re: fclean all
