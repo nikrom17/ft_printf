@@ -15,11 +15,13 @@
 
 void	handle_integer(char *input_string, int i, t_struct *flags)
 {
+	flags->chars_printed += ft_strlen(flags->str_args);
 	ft_putstr(flags->str_args);
 }
 
 void	handle_string(char *input_string, int i, t_struct *flags)
 {
+	flags->chars_printed += ft_strlen(flags->str_args);
 	ft_putstr(flags->str_args);
 }
 
