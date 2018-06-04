@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 08:51:31 by nroman            #+#    #+#             */
-/*   Updated: 2018/02/27 19:45:56 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/04 14:54:07 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@ size_t	ft_strlen(const char *str)
 	int		i;
 
 	i = 0;
-	while (str[i] != '\0')
+	if (str)
 	{
-		i++;
+		while (str[i] != '\0')
+		{
+			i++;
+		}
+		return (i);
 	}
-	return (i);
+	else
+		return (0);
 }

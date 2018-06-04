@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/02 08:29:14 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/04 16:53:39 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 		}
 		else
 		{
-			str = ft_strnew(input_string[i], fill);
+			str = ft_strnew(ft_atoi(&input_string[i]), fill);
 			str[len] = 0;
-			if (flags->plus)
+			if (flags->plus == '1')
 			{
 				str[0] = '+';
 				flags->str_args[0] = fill;
@@ -79,7 +79,8 @@ void	handle_plus(char *input_string, int i, t_struct *flags)
 
 void	handle_percent(char *input_string, int i, t_struct *flags)
 {
-	write(1, "%", 1);
+	flags->chars_printed += ft_strlen(flags->str_args);
+	ft_putstr(flags->str_args);
 }
 
 void	handle_minus(char *input_string, int i, t_struct *flags)
@@ -178,12 +179,14 @@ void	handle_unsigned(char *input_string, int i, t_struct *flags)
 void	handle_octal(char *input_string, int i, t_struct *flags)
 {		
 	int		j;
+
 	j = -1;
 	if (input_string[i] == 'O')
 	{
 		while(flags->str_args[++j])
 			flags->str_args[j] = ft_toupper(flags->str_args[j]);
 	}
+	flags->chars_printed += ft_strlen(flags->str_args);
 	ft_putstr(flags->str_args);
 }
 
@@ -196,6 +199,7 @@ void	handle_hex(char *input_string, int i, t_struct *flags)
 		while(flags->str_args[++j])
 			flags->str_args[j] = ft_toupper(flags->str_args[j]);
 	}
+	flags->chars_printed += ft_strlen(flags->str_args);
 	ft_putstr(flags->str_args);
 }
 
