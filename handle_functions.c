@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/04 21:37:50 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/04 21:59:11 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,9 @@ void	handle_z(char *input_string, int i, t_struct *flags)
 
 void	handle_unsigned(char *input_string, int i, t_struct *flags)
 {
-	//code here
+	flags->chars_printed += ft_strlen(flags->str_args);
+	ft_putstr(flags->str_args);
+
 }
 
 void	handle_octal(char *input_string, int i, t_struct *flags)
