@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/04 16:53:55 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/04 21:37:53 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	check_length_mod(char *input_string, int i, t_struct *flags)
 	modifier = 0;
 	if (input_string[i] == 'x' || input_string[i] == 'X')
 		flags->base = 16;
-	else
+	if (input_string[i] == 'o' || input_string[i] == 'O')
 		flags->base = 8;
 	if (ft_isalpha(input_string[--i]))
 		modifier = input_string[i];
@@ -63,6 +63,8 @@ void	check_length_mod(char *input_string, int i, t_struct *flags)
 		jump_table[table_index[modifier - 32]](input_string, i, flags);
 	else
 		flags->str_args = ft_itoa_base(va_arg(flags->args, int), flags->base);
+	if (flags->str_args[0] == '-')
+		flags->neg ='1';
 }
 
 void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
@@ -74,6 +76,8 @@ void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
 		check_length_mod(input_string, i, flags);
 	else if (table_index[input_string[i] - 32] == 21) //%%
 		flags->str_args[0] = '%';
+	else if (table_index[input_string[i] - 32] > 21)
+		flags->c = va_arg(flags->args, int);
 	else
 		flags->str_args = va_arg(flags->args, char *);
 }
@@ -91,6 +95,8 @@ int		handle_perc(char *input_string, int i, t_struct *flags)
 			flag = 0;
 		}
 		jump_table[TI](input_string, i++, flags);
+		if (input_string[i] == '.')
+			i++;
 	}
 	return (i - 1);
 }
@@ -105,9 +111,12 @@ t_struct	*init_struct(void)
 	flags->plus = '0';
 	flags->minus = '0';
 	flags->base = 10;
+	flags->space = '0';
 	flags->type = '0';
+	flags->neg = '0';
 	flags->chars_printed = 0;
 	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
+	flags->c = '0';
 	return (flags);
 }
 

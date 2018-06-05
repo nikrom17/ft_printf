@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 20:09:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/02 08:29:17 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/04 20:11:27 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ char	*ft_itoa_base(long long int nb, int base)
 	int					len;
 	char				*res;
 	int					temp;
+	int					flag;
 
 	i = 0;
+	flag = 0;
 	if (nb == 0)
 		return (ft_strdup("0"));
 	if (nb == -2147483648)
@@ -30,6 +32,7 @@ char	*ft_itoa_base(long long int nb, int base)
 		return (NULL);
 	else if (nb < 0)
 	{
+		flag =1;
 		nb = nb * -1;
 		res[len - 1] = '-';
 	}
@@ -42,6 +45,9 @@ char	*ft_itoa_base(long long int nb, int base)
 			res[i++] = temp + '0';
 		nb /= base;
 	}
-	res[i] = 0;
+	if (flag)
+		res[++i] = 0;
+	else
+		res[i] = 0;
 	return (ft_strrev(res));
 }

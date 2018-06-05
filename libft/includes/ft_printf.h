@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 11:59:56 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/04 16:54:00 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/04 21:37:57 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ typedef struct		s_flags
 	char			plus;
 	char			minus;
 	int				base;
+	char			space;
 	char			type;
+	char			neg;
 	char			*str_args;
+	char			c;
 	va_list			args;
-	int			chars_printed;
+	int				chars_printed;
 }					t_struct;
 
 typedef void (*create_j_table)(char *, int, t_struct *);
@@ -48,11 +51,11 @@ static const int table_index[] =
              0,            0,            0,            0,
   /* 'X' */ 18,            0, /* 'Z' */  0,            0,
              0,            0,            0,            0,
-             0, /* 'a' */  0,            0, /* 'c' */  0,
+             0, /* 'a' */  0,            0, /* 'c' */ 22,
   /* 'd' */ 15, /* 'e' */  0, /* 'f' */  0, /* 'g' */  0,
   /* 'h' */  9, /* 'i' */ 15, /* 'j' */ 13,            0,
   /* 'l' */ 11, /* 'm' */  0, /* 'n' */  0, /* 'o' */ 17,
-  /* 'p' */  0, /* 'q' */  0,            0, /* 's' */ 19,
+  /* 'p' */  0, /* 'q' */  0,            0, /* 's' */ 20,
   /* 't' */  0, /* 'u' */  0,            0,            0,
   /* 'x' */ 18,            0, /* 'z' */ 14,            0,
              0,            0,            0,            0,

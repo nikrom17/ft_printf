@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/04 16:53:39 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/04 21:37:50 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,12 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 		{
 			str = ft_strnew(ft_atoi(&input_string[i]), fill);
 			str[len] = 0;
-			if (flags->plus == '1')
+			if (flags->plus == '1' || (flags->neg == '1' && fill == '0'))
 			{
-				str[0] = '+';
+				if (flags->neg == '1')
+					str[0] = '-';
+				else
+					str[0] = '+';
 				flags->str_args[0] = fill;
 			}
 			flags->str_args = ft_strcat(str, flags->str_args);
@@ -59,6 +62,13 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 
 void    handle_precision(char *input_string, int i, t_struct *flags)
 {
+	int		n;
+
+	if (flags->type == 's')
+	{
+		n = ft_atoi(&input_string[++i]);
+		flags->str_args[1] = '\0';
+	}
 
 }
 
@@ -66,15 +76,13 @@ void	handle_plus(char *input_string, int i, t_struct *flags)
 {
 	char	*plus;
 
-	flags->plus = '1';
-	plus = ft_strnew(1, '+');
-	if (flags->str_args[0] == '-')
-		return ;
-	else
+	if (flags->plus == '0' && flags->neg == '0')
+	{
+		flags->plus = '1';
+		plus = ft_strnew(1, '+');
 		flags->str_args = ft_strjoin(plus, flags->str_args);
-		//str is malloced in strjoin
-		//free(str);
 		free(plus);
+	}
 }
 
 void	handle_percent(char *input_string, int i, t_struct *flags)
@@ -96,7 +104,10 @@ void	handle_zero(char *input_string, int i, t_struct *flags)
 
 void	handle_space(char *input_string, int i, t_struct *flags)
 {
-	//code here
+	if ((flags->type == 'd' || flags->type =='i') && flags->space == '0')
+	{
+		ft_strjoin(" ", flags->str_args);
+	}
 }
 
 void	handle_hash(char *input_string, int i, t_struct *flags)
@@ -210,7 +221,8 @@ void	handle_float(char *input_string, int i, t_struct *flags)
 
 void	handle_character(char *input_string, int i, t_struct *flags)
 {
-	//code here
+	flags->chars_printed += 1;
+	ft_putchar(flags->c);
 }
 
 void	handle_pointer(char *input_string, int i, t_struct *flags)
