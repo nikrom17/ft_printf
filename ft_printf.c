@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/04 22:06:19 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/04 22:14:21 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	check_length_mod(char *input_string, int i, t_struct *flags)
 	if (input_string[i] == 'o' || input_string[i] == 'O')
 		flags->base = 8;
 	if (input_string[i] == 'U')
+		modifier = 'l';
+	if (input_string[i] == 'D')
 		modifier = 'l';
 	if (ft_isalpha(input_string[--i]))
 		modifier = input_string[i];
