@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/04 22:23:44 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/04 22:37:20 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ int		handle_perc(char *input_string, int i, t_struct *flags)
 			flag = 0;
 		}
 		jump_table[TI](input_string, i++, flags);
-		if (input_string[i] == '.')
-			i++;
+		/*if (input_string[i] == '.')
+			i++; */
 	}
 	return (i - 1);
 }
