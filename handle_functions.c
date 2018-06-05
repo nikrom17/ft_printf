@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/04 22:14:18 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/04 22:26:13 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void    handle_precision(char *input_string, int i, t_struct *flags)
 	if (flags->type == 's')
 	{
 		n = ft_atoi(&input_string[++i]);
-		flags->str_args[1] = '\0';
+		//flags->str_args[1] = '\0';
 	}
 
 }
