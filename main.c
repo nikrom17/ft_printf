@@ -15,14 +15,14 @@
 
 int		main(void) 
 {
-//	int		num = 42;
+	unsigned char		num = 131;
 	//wchar_t		c = 128;
-	//char	*str = "did";
+	char	*str = "did it on 'em";
 	//char	*str1 = "it";
 	//char	*str2 = "on `em";
 
-	ft_printf("MEEE: %4.15d", 42);
-	printf("THEM: %4.15d", 42);
+	ft_printf("MEEE: %#x\n", 42);
+	printf("THEM: %#x\n", 42);
 	//ft_printf("MEEE - String value: %c %s %s\n",str[0], str1, str2);
 	//printf("THEM - String value: %c %s %s\n",str[0], str1, str2);
 

@@ -29,7 +29,7 @@ $(NAME): $(DEPENDENCY)
 	$(CC) $(OPTION) $(FLAGS) $(DEPENDENCY)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
-	gcc main.c -Wall -Werror -g libftprintf.a -I ./libft/includes
+	gcc main.c -g libftprintf.a -I ./libft/includes
 
 clean:
 	rm -f $(OBJ) libft/$(OBJ)
