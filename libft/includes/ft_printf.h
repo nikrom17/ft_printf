@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 11:59:56 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/17 19:55:23 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/18 08:34:20 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static const int table_index[] =
 int		ft_printf(char *input_string, ...);
 void	check_length_mod(char *input_string, int i, t_struct *flags);
 int		handle_perc(char *input_string, int i, t_struct *flags);
+void	reset_struct(t_struct *flags);
 void	find_conversion_specifier(char *input_string, int i, t_struct *flags);
 void	handle_space(char *input_string, int i, t_struct *flags);
 void	handle_percent(char *input_string, int i, t_struct *flags);

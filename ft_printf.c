@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/17 19:55:18 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/18 08:34:43 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void		check_length_mod(char *input_string, int i, t_struct *flags)
 	if (input_string[i] == 'D')
 		modifier = 'l';
 	if (ft_isalpha(input_string[i - 1]))
-		modifier = input_string[i];
+		modifier = input_string[i - 1];
 	if (ft_isalpha(input_string[i - 2]))
-		modifier = ft_toupper(input_string[i]);
+		modifier = ft_toupper(input_string[i - 2]);
 	if (modifier)
 		jump_table[table_index[modifier - 32]](input_string, i, flags);
 	else if (flags->type == 'd' || flags->type == 'i')
@@ -83,7 +83,7 @@ void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
 	}
 	flags->type = input_string[i];
 	if (table_index[input_string[i] - 32] < 20)
-		return (check_length_mod(input_string, i, flags));
+		check_length_mod(input_string, i, flags);
 	else if (table_index[input_string[i] - 32] == 21) //%%
 		flags->str_args[0] = '%';
 	else if (table_index[input_string[i] - 32] > 21)
@@ -108,6 +108,7 @@ int		handle_perc(char *input_string, int i, t_struct *flags)
 		/*if (input_string[i] == '.')
 			i++; */
 	}
+	reset_struct(flags);
 	return (i - 1);
 }
 
@@ -132,6 +133,26 @@ t_struct	*init_struct(void)
 	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
 	flags->c = '0';
 	return (flags);
+}
+
+
+void	reset_struct(t_struct *flags)
+{
+	flags->hash = NULL;
+	flags->flag = 0;
+	flags->zero = '0';
+	flags->plus = '0';
+	flags->minus = '0';
+	flags->width = '1';
+	flags->base = 10;
+	flags->space = '0';
+	flags->precision = -1;
+	flags->type = '0';
+	flags->size_modifier = '0';
+	flags->neg = '0';
+	free(flags->str_args);
+	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
+	flags->c = '0';
 }
 
 int		ft_printf(char *input_string, ...)
