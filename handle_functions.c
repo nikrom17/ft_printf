@@ -6,9 +6,9 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/17 19:55:15 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/17 19:59:45 by nroman           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+ /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
@@ -186,7 +186,7 @@ void	handle_l(char *input_string, int i, t_struct *flags)
 {
 	if (flags->size_modifier == '0')
 	{
-		flags->size_modifer == 'l';
+		flags->size_modifier = 'l';
 		if (flags->type == 'd' || flags->type == 'i' || flags->type == 'D')
 			flags->str_args = ft_itoa(va_arg(flags->args, long));
 		else
@@ -198,7 +198,7 @@ void	handle_ll(char *input_string, int i, t_struct *flags)
 {
 	if (flags->size_modifier == '0')
 	{
-		flags->size_modifer == 'l';
+		flags->size_modifier = 'L';
 		if (flags->type == 'd' || flags->type == 'i')
 			flags->str_args = ft_itoa(va_arg(flags->args, long long));
 		else
@@ -210,7 +210,7 @@ void	handle_j(char *input_string, int i, t_struct *flags)
 {
 	if (flags->size_modifier == '0')
 	{
-		flags->size_modifer == 'l';
+		flags->size_modifier = 'j';
 		if (flags->type == 'd' || flags->type == 'i')
 			flags->str_args = ft_itoa(va_arg(flags->args, intmax_t));
 		else
@@ -222,7 +222,7 @@ void	handle_z(char *input_string, int i, t_struct *flags)
 {
 	if (flags->size_modifier == '0')
 	{
-		flags->size_modifer == 'l';
+		flags->size_modifier = 'z';
 		if (flags->type == 'd' || flags->type == 'i')
 			flags->str_args = ft_itoa(va_arg(flags->args, size_t));
 		else
