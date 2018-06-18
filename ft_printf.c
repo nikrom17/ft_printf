@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/18 08:34:43 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/18 08:59:34 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		check_length_mod(char *input_string, int i, t_struct *flags)
 
 void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
 {
-	while (table_index[input_string[i] - 32] < 14)
+	while (table_index[input_string[i] - 32] < 15)
 	{
 		if (input_string[i] == '.')
 			flags->precision = ft_atoi(&input_string[i + 1]);
@@ -100,7 +100,7 @@ int		handle_perc(char *input_string, int i, t_struct *flags)
 	flag = 1;
 	while (flag)
 	{
-		if ((TI = table_index[input_string[i] - 32]) > 13)
+		if ((TI = table_index[input_string[i] - 32]) > 14)
 		{
 			flag = 0;
 		}
