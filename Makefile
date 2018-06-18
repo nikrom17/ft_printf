@@ -6,7 +6,7 @@
 #    By: nroman <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/26 12:48:11 by nroman            #+#    #+#              #
-#    Updated: 2018/05/30 10:51:33 by nroman           ###   ########.fr        #
+#    Updated: 2018/06/17 20:19:05 by nroman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ $(NAME): $(DEPENDENCY)
 	$(CC) $(OPTION) $(FLAGS) $(DEPENDENCY)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
-	gcc main.c -g libftprintf.a -I ./libft/includes
 
 clean:
 	rm -f $(OBJ) libft/$(OBJ)
