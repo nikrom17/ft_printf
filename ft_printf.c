@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/04 22:37:20 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/17 19:55:18 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@ create_j_table jump_table[25] =
 	handle_string,          /* for 's', 'S' */
 	handle_percent,         /* for '%' */
 	handle_character,       /* for 'c' */
-	handle_wcharacter,      /* for 'C' */
+		handle_wcharacter,      /* for 'C' */
  };
-
-void	check_length_mod(char *input_string, int i, t_struct *flags)
+void		check_length_mod(char *input_string, int i, t_struct *flags)
 {
 	char	modifier;
 
@@ -58,11 +57,10 @@ void	check_length_mod(char *input_string, int i, t_struct *flags)
 		modifier = 'l';
 	if (input_string[i] == 'D')
 		modifier = 'l';
-	if (ft_isalpha(input_string[--i]))
+	if (ft_isalpha(input_string[i - 1]))
 		modifier = input_string[i];
-	if (ft_isalpha(input_string[--i]))
-		modifier = input_string[i];
-	i += 2;
+	if (ft_isalpha(input_string[i - 2]))
+		modifier = ft_toupper(input_string[i]);
 	if (modifier)
 		jump_table[table_index[modifier - 32]](input_string, i, flags);
 	else if (flags->type == 'd' || flags->type == 'i')
@@ -85,7 +83,7 @@ void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
 	}
 	flags->type = input_string[i];
 	if (table_index[input_string[i] - 32] < 20)
-		check_length_mod(input_string, i, flags);
+		return (check_length_mod(input_string, i, flags));
 	else if (table_index[input_string[i] - 32] == 21) //%%
 		flags->str_args[0] = '%';
 	else if (table_index[input_string[i] - 32] > 21)
@@ -128,6 +126,7 @@ t_struct	*init_struct(void)
 	flags->space = '0';
 	flags->precision = -1;
 	flags->type = '0';
+	flags->size_modifier = '0';
 	flags->neg = '0';
 	flags->chars_printed = 0;
 	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
@@ -135,7 +134,7 @@ t_struct	*init_struct(void)
 	return (flags);
 }
 
-int	ft_printf(char *input_string, ...)
+int		ft_printf(char *input_string, ...)
 {
 	int			i;
 	t_struct	*flags;

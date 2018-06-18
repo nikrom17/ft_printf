@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 11:59:56 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/04 22:23:52 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/17 19:55:23 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@
 typedef struct		s_flags 
 {
 	char			*hash;
-	int			flag;
+	int				flag;
 	char			zero;
 	char			plus;
 	char			minus;
 	char			width;
 	int				base;
 	char			space;
-	int			precision;
+	int				precision;
 	char			type;
+	char			size_modifier;
 	char			neg;
 	char			*str_args;
 	char			c;
@@ -48,7 +49,7 @@ static const int table_index[] =
              0,            0,            0,            0,
              0, /* 'A' */  0,            0, /* 'C' */ 23,
   /* 'D' */ 15, /* 'E' */  0, /* F */    0, /* 'G' */  0,
-  /* 'H' */ 10, /* 'I' */  0,            0,            0,
+  /* 'H' */  9, /* 'I' */  0,            0,            0,
   /* 'L' */ 12,            0,            0, /* 'O' */ 17,
              0,            0,            0, /* 'S' */  0,
              0, /* 'U' */ 16,            0,            0,
@@ -56,7 +57,7 @@ static const int table_index[] =
              0,            0,            0,            0,
              0, /* 'a' */  0,            0, /* 'c' */ 22,
   /* 'd' */ 15, /* 'e' */  0, /* 'f' */  0, /* 'g' */  0,
-  /* 'h' */  9, /* 'i' */ 15, /* 'j' */ 13,            0,
+  /* 'h' */ 10, /* 'i' */ 15, /* 'j' */ 13,            0,
   /* 'l' */ 11, /* 'm' */  0, /* 'n' */  0, /* 'o' */ 17,
   /* 'p' */ 19, /* 'q' */  0,            0, /* 's' */ 20,
   /* 't' */  0, /* 'u' */ 16,            0,            0,
@@ -65,8 +66,9 @@ static const int table_index[] =
              0
 };
 
-int	ft_printf(char *input_string, ...);
-int	handle_perc(char *input_string, int i, t_struct *flags);
+int		ft_printf(char *input_string, ...);
+void	check_length_mod(char *input_string, int i, t_struct *flags);
+int		handle_perc(char *input_string, int i, t_struct *flags);
 void	find_conversion_specifier(char *input_string, int i, t_struct *flags);
 void	handle_space(char *input_string, int i, t_struct *flags);
 void	handle_percent(char *input_string, int i, t_struct *flags);
