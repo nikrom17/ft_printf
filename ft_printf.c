@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/18 08:59:34 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/18 09:22:07 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ create_j_table jump_table[25] =
 	handle_string,          /* for 's', 'S' */
 	handle_percent,         /* for '%' */
 	handle_character,       /* for 'c' */
-		handle_wcharacter,      /* for 'C' */
+	handle_wcharacter,      /* for 'C' */
  };
 void		check_length_mod(char *input_string, int i, t_struct *flags)
 {

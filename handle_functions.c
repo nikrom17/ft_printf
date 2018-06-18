@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/18 08:34:11 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/18 09:31:58 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -311,5 +311,13 @@ void	handle_pointer(char *input_string, int i, t_struct *flags)
 
 void	handle_wcharacter(char *input_string, int i, t_struct *flags)
 {
-	//code here
+	/*
+	if (flags->size_modifier == '0')
+	{
+		flags->size_modifier = 'C';
+			flags->str_args = ft_itoa(va_arg(flags->args, wchar_t));
+	} */
+
+	flags->chars_printed += 1;
+	ft_putchar(flags->c);
 }
