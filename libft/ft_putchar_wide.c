@@ -6,13 +6,16 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 11:21:18 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 11:51:02 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 11:50:14 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar(char c)
+void	ft_putchar_wide(wchar_t c)
 {
-	write(1, &c, 1);
+	unsigned int	s;
+
+	s = (unsigned int)c;
+	write(1, &s, 1);
 }
