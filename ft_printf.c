@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 12:17:09 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 16:23:47 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ void		check_length_mod(char *input_string, int i, t_struct *flags)
 	if (input_string[i] == 'p')
 		modifier = 'p';
 	if (ft_isalpha(input_string[i - 1]))
+	{
 		modifier = input_string[i - 1];
-	if (ft_isalpha(input_string[i - 2]))
-		modifier = ft_toupper(input_string[i - 2]);
+		if (ft_isalpha(input_string[i - 2]))
+			modifier = ft_toupper(input_string[i - 2]);
+	}
 	if (modifier)
 		jump_table[table_index[modifier - 32]](input_string, i, flags);
 	else if (flags->type == 'd' || flags->type == 'i')
