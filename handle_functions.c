@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 09:42:26 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 09:50:55 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -164,9 +164,9 @@ void	handle_h(char *input_string, int i, t_struct *flags)
 	{
 		flags->size_modifier = 'h';
 		if (flags->type == 'd' || flags->type == 'i')
-			flags->str_args = ft_itoa((short)va_arg(flags->args, int));
+			flags->str_args = ft_itoa_base((short)va_arg(flags->args, int), flags->base);
 		else
-			flags->str_args = ft_nitoa((unsigned short)va_arg(flags->args, int));
+			flags->str_args = ft_uitoa_base((unsigned short)va_arg(flags->args, int), flags->base);
 	}
 }
 
@@ -176,9 +176,9 @@ void	handle_hh(char *input_string, int i, t_struct *flags)
 	{
 		flags->size_modifier = 'H';
 		if (flags->type == 'd' || flags->type == 'i')
-		flags->str_args = ft_itoa((signed char)va_arg(flags->args, int));
+		flags->str_args = ft_itoa_base((signed char)va_arg(flags->args, int), flags->base);
 		else
-			flags->str_args = ft_nitoa((unsigned char)va_arg(flags->args, int));
+			flags->str_args = ft_uitoa_base((unsigned char)va_arg(flags->args, int), flags->base);
 	}
 }
 
@@ -208,9 +208,9 @@ void	handle_ll(char *input_string, int i, t_struct *flags)
 	{
 		flags->size_modifier = 'L';
 		if (flags->type == 'd' || flags->type == 'i')
-			flags->str_args = ft_itoa(va_arg(flags->args, long long));
+			flags->str_args = ft_itoa_base(va_arg(flags->args, long long), flags->base);
 		else
-			flags->str_args = ft_uitoa(va_arg(flags->args, unsigned long long));
+			flags->str_args = ft_uitoa_base(va_arg(flags->args, unsigned long long), flags->base);
 	}
 }
 
@@ -220,9 +220,9 @@ void	handle_j(char *input_string, int i, t_struct *flags)
 	{
 		flags->size_modifier = 'j';
 		if (flags->type == 'd' || flags->type == 'i')
-			flags->str_args = ft_itoa(va_arg(flags->args, intmax_t));
+			flags->str_args = ft_itoa_base(va_arg(flags->args, intmax_t), flags->base);
 		else
-			flags->str_args = ft_uitoa(va_arg(flags->args, uintmax_t));
+			flags->str_args = ft_uitoa_base(va_arg(flags->args, uintmax_t), flags->base);
 	}
 }
 
@@ -232,9 +232,9 @@ void	handle_z(char *input_string, int i, t_struct *flags)
 	{
 		flags->size_modifier = 'z';
 		if (flags->type == 'd' || flags->type == 'i')
-			flags->str_args = ft_itoa(va_arg(flags->args, size_t));
+			flags->str_args = ft_itoa_base(va_arg(flags->args, size_t), flags->base);
 		else
-			flags->str_args = ft_uitoa(va_arg(flags->args, size_t));
+			flags->str_args = ft_uitoa_base(va_arg(flags->args, size_t), flags->base);
 	}
 }
 
