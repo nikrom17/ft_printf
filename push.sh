@@ -5,5 +5,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	git commit -m "fix mistakes"
 	git push
+else
+	git reset
 fi
+
 
