@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 10:43:57 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 11:18:20 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -304,10 +304,16 @@ void	handle_character(char *input_string, int i, t_struct *flags)
 
 void	handle_pointer(char *input_string, int i, t_struct *flags)
 {
-	if (flags->size_modifier != '*')
+	if (flags->flag != 'p')
 	{
 		flags->str_args = ft_uitoa_base(va_arg(flags->args, unsigned long long), 16);
+		flags->type = 'x';
+		handle_hash(input_string, i, flags);
+		flags->type = 'p';
+		flags->flag = 'p';
 	}
+	else
+		handle_string(input_string, i, flags);
 }
 
 void	handle_wcharacter(char *input_string, int i, t_struct *flags)
