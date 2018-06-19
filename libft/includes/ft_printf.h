@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 11:59:56 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 11:08:19 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 12:00:25 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_flags
 	char			c;
 	va_list			args;
 	int				chars_printed;
+	wchar_t			*str_wide;
 }					t_struct;
 
 typedef void (*create_j_table)(char *, int, t_struct *);

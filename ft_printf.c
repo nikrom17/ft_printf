@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 11:57:03 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 12:04:08 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
 	else if (table_index[input_string[i] - 32] > 21)
 		flags->c = va_arg(flags->args, int);
 	else if (flags->type == 'S')	
-		flags->str_args = (char *)va_arg(flags->args, wchar_t *);
+		flags->str_wide = va_arg(flags->args, wchar_t *);
 	else
 		flags->str_args = va_arg(flags->args, char *);
 }
@@ -136,6 +136,7 @@ t_struct	*init_struct(void)
 	flags->chars_printed = 0;
 	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
 	flags->c = '0';
+	flags->str_wide = (wchar_t *)ft_memalloc(sizeof(wchar_t) * 2);
 	return (flags);
 }
 
