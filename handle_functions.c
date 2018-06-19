@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 11:47:45 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 11:56:45 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	handle_string(char *input_string, int i, t_struct *flags)
 	{
 		while (flags->str_args[++j])
 		{
-			flags->c = (unsigned char)flags->str_args[j];
+			flags->c = (wchar_t)flags->str_args[j];
 			handle_wcharacter(input_string, i, flags);
 		}
 	}
