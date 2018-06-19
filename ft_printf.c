@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 12:04:08 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 12:15:41 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,11 @@ void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
 		flags->str_args[0] = '%';
 	else if (table_index[input_string[i] - 32] > 21)
 		flags->c = va_arg(flags->args, int);
-	else if (flags->type == 'S')	
+	else if (flags->type == 'S' || (flags->type == 's' && input_string[i - 1] == 'l'))
+	{
 		flags->str_wide = va_arg(flags->args, wchar_t *);
+		flags->type = 'S';
+	}
 	else
 		flags->str_args = va_arg(flags->args, char *);
 }

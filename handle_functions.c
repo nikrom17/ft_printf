@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 12:02:58 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 12:12:35 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -199,8 +199,8 @@ void	handle_hh(char *input_string, int i, t_struct *flags)
 void	handle_l(char *input_string, int i, t_struct *flags)
 {
 	size_t		temp;
-
-	if (flags->size_modifier == '0')
+	
+	if (flags->size_modifier == '0' && flags->type != 's')
 	{
 		flags->size_modifier = 'l';
 		if (flags->type == 'd' || flags->type == 'i' || flags->type == 'D')
