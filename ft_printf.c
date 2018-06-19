@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 16:44:32 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 16:53:01 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
 			flags->precision = ft_atoi(&input_string[i + 1]);
 		if (ft_isdigit(input_string[i]))
 			flags->width = '1';
+		if (input_string[i] == ' ')
+			flags->space = '1';
 		i++;
 	}
 	flags->type = input_string[i];
