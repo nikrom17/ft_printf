@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 20:54:55 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 21:33:50 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
 	}
 	else
 		flags->str_args = va_arg(flags->args, char *);
+	if (flags->str_args == NULL)
+		flags->str_args = ft_strdup("(null)");
 }
 
 int		handle_perc(char *input_string, int i, t_struct *flags)
