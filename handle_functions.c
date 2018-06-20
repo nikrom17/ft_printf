@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 09:47:36 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 09:51:19 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -86,8 +86,9 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 			}
 			free(str);
 		}
+		/*
 		if (flags->space == '2')
-			flags->str_args = ft_strjoin(" ", flags->str_args);
+			flags->str_args = ft_strjoin(" ", flags->str_args); */
 	}
 }
 
