@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 11:35:18 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 11:39:00 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ void	populate_struct(char *input_string, int i, t_struct *flags)
 			flags->plus = '1';
 		if (input_string[i] == '0')
 			flags->zero = '1';
-		if (input_string[i] == 'x' || input_string[i] == 'X')
-			flags->base = 16;
-		if (input_string[i] == 'o' || input_string[i] == 'O')
-			flags->base = 8;
-		if (input_string[i] == 'U' || input_string[i] == 'D' || input_string[i] == 'S' || input_string[i] == 'C')
-			flags->size_modifier = 'l';
 	}
 	flags->type = input_string[i];
+	if (input_string[i] == 'x' || input_string[i] == 'X')
+		flags->base = 16;
+	if (input_string[i] == 'o' || input_string[i] == 'O')
+		flags->base = 8;
+	if (input_string[i] == 'U' || input_string[i] == 'D' || input_string[i] == 'S' || input_string[i] == 'C')
+			flags->size_modifier = 'l';
 	if (input_string[i] == 'p')
 		flags->size_modifier = 'P';
 	if (ft_isalpha(input_string[i - 1]))
