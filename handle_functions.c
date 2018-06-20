@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 21:06:24 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 21:20:11 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -114,9 +114,14 @@ void	handle_plus(char *input_string, int i, t_struct *flags)
 	if (flags->plus == '1' && flags->neg == '0')
 	{
 		flags->plus = '2';
-		plus = ft_strnew(1, '+');
-		flags->str_args = ft_strjoin(plus, flags->str_args);
-		free(plus);
+		if (flags->zero == '1')
+			flags->hash = ft_strdup("+");
+		else
+		{
+			plus = ft_strnew(1, '+');
+			flags->str_args = ft_strjoin(plus, flags->str_args);
+			free(plus);
+		}
 	}
 }
 
