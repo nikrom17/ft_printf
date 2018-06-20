@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 11:03:24 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 11:27:20 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		convert_nums(char *input_string, int i, t_struct *flags)
 	if (flags->size_modifier != '0')
 		jump_table[table_index[flags->size_modifier - 32]](input_string, i, flags);
 	else if (flags->type == 'd' || flags->type == 'i')
-		flags->str_args = ft_itoa_base(va_arg(flags->args, int), flags->base);
+		flags->str_args = ft_itoa_base(va_arg(flags->args, int), flags->base); 
 	else
 		flags->str_args = ft_itoa_base(va_arg(flags->args, unsigned  int), flags->base);
 	if (flags->str_args[0] == '-')
@@ -81,10 +81,10 @@ void	populate_struct(char *input_string, int i, t_struct *flags)
 			flags->base = 8;
 		if (input_string[i] == 'U' || input_string[i] == 'D' || input_string[i] == 'S' || input_string[i] == 'C')
 			flags->size_modifier = 'l';
-		if (input_string[i] == 'p')
-			flags->size_modifier = 'P';
 	}
 	flags->type = input_string[i];
+	if (input_string[i] == 'p')
+		flags->size_modifier = 'P';
 	if (ft_isalpha(input_string[i - 1]))
 	{
 		flags->size_modifier = input_string[i - 1];
