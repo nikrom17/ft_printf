@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 09:11:40 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 09:45:43 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -67,10 +67,15 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 					fill = ' ';
 				str = ft_strnew(ft_atoi(&input_string[i]), fill);
 				str[len] = 0;
-				if (flags->plus == '1' || (flags->neg == '1' && fill == '0'))
+				if (flags->plus == '1' || (flags->neg == '1' && fill == '0') || flags->space == '2')
 				{
 					if (flags->neg == '1')
 						str[0] = '-';
+					if (flags->space =='2')
+					{
+						str[0] = ' ';
+						fill = '0';
+					}
 					else
 						str[0] = '+';
 					flags->str_args[0] = fill;
@@ -81,6 +86,8 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 			}
 			free(str);
 		}
+		if (flags->space == '2')
+			flags->str_args = ft_strjoin(" ", flags->str_args);
 	}
 }
 
@@ -160,8 +167,13 @@ void	handle_space(char *input_string, int i, t_struct *flags)
 {
 	if ((flags->type == 'd' || flags->type =='i') && flags->space == '1' && flags->neg != '1' && flags->plus == '0')
 	{
-		flags->str_args = ft_strjoin(" ", flags->str_args);
-		flags->space = '0';
+		if (flags->precision > ft_strlen(flags->str_args))
+			flags->space = '2';
+		else
+		{
+			flags->str_args = ft_strjoin(" ", flags->str_args);
+			flags->space = '0';
+		}
 	}
 }
 
