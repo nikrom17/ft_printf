@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 11:39:00 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 13:16:48 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	populate_struct(char *input_string, int i, t_struct *flags)
 	{
 		if (input_string[i] == '.')
 			flags->precision = ft_atoi(&input_string[i + 1]);
-		if (ft_isdigit(input_string[i]))
-			flags->width = '1';
+		if (ft_isdigit(input_string[i]) && flags->width < 0)
+			flags->width = ft_atoi(&input_string[i]);
 		if (input_string[i] == ' ')
 			flags->space = '1';
 		if (input_string[i] == '+')
@@ -96,6 +96,15 @@ void	populate_struct(char *input_string, int i, t_struct *flags)
 	}
 }
 
+void	cancel_conflicts(char *input_string, int i, t_struct *flags)
+{
+	if (flags->plus == '1' && flags->space == '1')
+		flags->space = '0';
+	if (flags->zero == '1' && flags->minus == '1')
+		flags->zero = '0';
+}
+
+
 t_struct	*init_struct(void)
 {
 	t_struct	*flags;
@@ -106,7 +115,7 @@ t_struct	*init_struct(void)
 	flags->zero = '0';
 	flags->plus = '0';
 	flags->minus = '0';
-	flags->width = '1';
+	flags->width = -1;
 	flags->base = 10;
 	flags->space = '0';
 	flags->precision = -1;
@@ -128,7 +137,7 @@ void	reset_struct(t_struct *flags)
 	flags->zero = '0';
 	flags->plus = '0';
 	flags->minus = '0';
-	flags->width = '1';
+	flags->width = 1;
 	flags->base = 10;
 	flags->space = '0';
 	flags->precision = -1;

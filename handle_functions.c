@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 11:20:35 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 13:18:25 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 			fill = ' ';
 		if (flags->precision >= 0)
 			handle_precision(input_string, i, flags);
-		if ((len = (ft_atoi(&input_string[i]) - ft_strlen(flags->str_args))) > 0)
+		if ((len = flags->width - ft_strlen(flags->str_args)) > 0)
 		{
 			if (flags->minus == '1')
 			{
@@ -63,9 +63,9 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 			}
 			else
 			{
-				if (ft_atoi(&input_string[i]) > flags->precision && table_index[flags->type - 32] < 20 && flags->zero == '1' && flags->precision >= 0)
+				if (flags->width > flags->precision && table_index[flags->type - 32] < 20 && flags->zero == '1' && flags->precision >= 0)
 					fill = ' ';
-				str = ft_strnew(ft_atoi(&input_string[i]), fill);
+				str = ft_strnew(flags->width, fill);
 				str[len] = 0;
 				if (flags->plus == '1' || (flags->neg == '1' && fill == '0'))
 				{
@@ -144,15 +144,12 @@ void	handle_percent(char *input_string, int i, t_struct *flags)
 
 void	handle_minus(char *input_string, int i, t_struct *flags)
 {
-	flags->minus = '1';
-	if (flags->zero == '1')
-		flags->zero = '0';
+	//don't need this
 }
 
 void	handle_zero(char *input_string, int i, t_struct *flags)
 {
-	if (flags->minus == '0')
-		flags->zero = '1';
+	//don't need this
 }
 
 
@@ -333,6 +330,7 @@ void	handle_character(char *input_string, int i, t_struct *flags)
 {
 	int		j;
 	int		len;
+
 	if (flags->str_args[0])
 	{
 		len = ft_strlen(flags->str_args);
@@ -368,13 +366,6 @@ void	handle_pointer(char *input_string, int i, t_struct *flags)
 
 void	handle_wcharacter(char *input_string, int i, t_struct *flags)
 {
-	/*
-	if (flags->size_modifier == '0')
-	{
-		flags->size_modifier = 'C';
-			flags->str_args = ft_itoa(va_arg(flags->args, wchar_t));
-	} */
-
 	flags->chars_printed += 1;
 	ft_putchar(flags->c);
 }
