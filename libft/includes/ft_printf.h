@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 11:59:56 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 20:25:23 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 09:07:04 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,34 @@ void	handle_string(char *input_string, int i, t_struct *flags);
 void	handle_pointer(char *input_string, int i, t_struct *flags);
 void	handle_wcharacter(char *input_string, int i, t_struct *flags);
 
+static const create_j_table jump_table[25] =
+{
+	handle_hash,            /* for '#' */
+	handle_zero,            /* for '0' */
+	handle_width,           /* for '1'...'9' */
+	handle_precision,       /* for '.' */
+	handle_plus,            /* for '+' */
+	handle_minus,           /* for '-' */
+	handle_space,           /* for ' ' */
+	handle_backslash,       /* for '\' */
+	handle_asterisk,        /* for '*' */
+	handle_hh,              /* for 'hh' */
+	handle_h,               /* for 'h' */
+	handle_l,               /* for 'l' */
+	handle_ll,              /* for 'L', 'q' */
+	handle_j,               /* for 'j' */
+	handle_z,               /* for 'z'*/
+	//Converson Specifiers: start 15
+	//ints
+	handle_integer,         /* for 'd', 'i' */
+	handle_unsigned,        /* for 'u' , 'U'*/
+	handle_octal,           /* for 'o' */
+	handle_hex,             /* for 'X', 'x' */
+	handle_pointer,         /* for 'p' */
+	//strings start 20
+	handle_string,          /* for 's', 'S' */
+	handle_percent,         /* for '%' */
+	handle_character,       /* for 'c' */
+	handle_wcharacter,      /* for 'C' */
+};
 #endif //ft_printf
