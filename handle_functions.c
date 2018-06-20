@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 15:12:21 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 15:36:34 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,14 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 						str[0] = '+';
 					flags->str_args[0] = fill;
 				}
-				if (flags->hash)
-					str = ft_strrplc(str, flags->hash);
-				flags->str_args = ft_strcat(str, flags->str_args);
 			}
+			if (flags->hash)
+				str = ft_strrplc(str, flags->hash);
+			flags->str_args = ft_strcat(str, flags->str_args);
 			free(str);
 		}
+	if (flags->hash)
+		flags->str_args = ft_strjoin(flags->hash, flags->str_args);
 	}
 }
 
