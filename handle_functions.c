@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 20:37:46 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 20:57:30 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ void	handle_plus(char *input_string, int i, t_struct *flags)
 {
 	char	*plus;
 
-	if (flags->plus == '0' && flags->neg == '0')
+	if (flags->plus == '1' && flags->neg == '0')
 	{
-		flags->plus = '1';
+		flags->plus = '2';
 		plus = ft_strnew(1, '+');
 		flags->str_args = ft_strjoin(plus, flags->str_args);
 		free(plus);
@@ -139,7 +139,7 @@ void	handle_zero(char *input_string, int i, t_struct *flags)
 
 void	handle_space(char *input_string, int i, t_struct *flags)
 {
-	if ((flags->type == 'd' || flags->type =='i') && flags->space == '1' && flags->neg != '1')
+	if ((flags->type == 'd' || flags->type =='i') && flags->space == '1' && flags->neg != '1' && flags->plus == '0')
 	{
 		flags->str_args = ft_strjoin(" ", flags->str_args);
 		flags->space = '0';
@@ -150,17 +150,23 @@ void	handle_hash(char *input_string, int i, t_struct *flags)
 {
 	if (flags->type == 'x')
 	{
-		if (flags->width == '0')
-			flags->hash = ft_strdup("0x");
-		else
-			flags->str_args = ft_strjoin("0x", flags->str_args);
+		if (flags->str_args[0] != '0')
+		{
+			if (flags->width == '0')
+				flags->hash = ft_strdup("0x");
+			else
+				flags->str_args = ft_strjoin("0x", flags->str_args);
+		}
 	}
 	else if (flags->type == 'X')
 	{
-		if (flags->width == '0')
-			flags->hash = ft_strdup("0X");
-		else
-			flags->str_args = ft_strjoin("0X", flags->str_args);
+		if (flags->str_args[0] != '0')
+		{
+			if (flags->width == '0')
+				flags->hash = ft_strdup("0X");
+			else
+				flags->str_args = ft_strjoin("0X", flags->str_args);
+		}
 	}
 	else
 	{

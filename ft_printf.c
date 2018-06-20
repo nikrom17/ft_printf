@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 20:23:18 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 20:54:55 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
 			flags->width = '1';
 		if (input_string[i] == ' ')
 			flags->space = '1';
+		if (input_string[i] == '+')
+			flags->plus = '1';
 		i++;
 	}
 	flags->type = input_string[i];
