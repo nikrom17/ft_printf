@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 09:45:43 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 09:47:36 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void	handle_space(char *input_string, int i, t_struct *flags)
 		else
 		{
 			flags->str_args = ft_strjoin(" ", flags->str_args);
-			flags->space = '0';
+			flags->space = '3';
 		}
 	}
 }
