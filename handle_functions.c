@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 10:15:44 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 10:29:39 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 			}
 			else
 			{
-				if (ft_atoi(&input_string[i]) > flags->precision && table_index[flags->type - 32] < 20 && flags->zero == '1')
+				if (ft_atoi(&input_string[i]) > flags->precision && table_index[flags->type - 32] < 20 && flags->zero == '1' && flags->precision >= 0)
 					fill = ' ';
 				str = ft_strnew(ft_atoi(&input_string[i]), fill);
 				str[len] = 0;
@@ -161,7 +161,7 @@ void	handle_space(char *input_string, int i, t_struct *flags)
 	if ((flags->type == 'd' || flags->type =='i') && flags->space == '1' && flags->neg != '1' && flags->plus == '0')
 	{
 		flags->str_args = ft_strjoin(" ", flags->str_args);
-		flags->space = '2';
+		flags->space = '0';
 	}
 }
 
