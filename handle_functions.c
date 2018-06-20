@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 10:29:39 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 11:20:35 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,9 +211,9 @@ void	handle_asterisk(char *input_string, int i, t_struct *flags)
 
 void	handle_h(char *input_string, int i, t_struct *flags)
 {
-	if (flags->size_modifier == '0')
+	if (flags->size_modifier == 'h')
 	{
-		flags->size_modifier = 'h';
+		flags->size_modifier = '0';
 		if (flags->type == 'd' || flags->type == 'i')
 			flags->str_args = ft_itoa_base((short)va_arg(flags->args, int), flags->base);
 		else
@@ -223,9 +223,9 @@ void	handle_h(char *input_string, int i, t_struct *flags)
 
 void	handle_hh(char *input_string, int i, t_struct *flags)
 {
-	if (flags->size_modifier == '0')
+	if (flags->size_modifier == 'H')
 	{
-		flags->size_modifier = 'H';
+		flags->size_modifier = '0';
 		if (flags->type == 'd' || flags->type == 'i')
 		flags->str_args = ft_itoa_base((signed char)va_arg(flags->args, int), flags->base);
 		else
@@ -237,9 +237,9 @@ void	handle_l(char *input_string, int i, t_struct *flags)
 {
 	size_t		temp;
 	
-	if (flags->size_modifier == '0' && flags->type != 's')
+	if (flags->size_modifier == 'l' && flags->type != 's')
 	{
-		flags->size_modifier = 'l';
+		flags->size_modifier = '0';
 		if (flags->type == 'd' || flags->type == 'i' || flags->type == 'D')
 		{
 			temp = va_arg(flags->args, long);
@@ -247,6 +247,7 @@ void	handle_l(char *input_string, int i, t_struct *flags)
 		}
 		else
 		{
+			flags->size_modifier = '0';
 			temp = va_arg(flags->args, unsigned long);
 			flags->str_args = ft_uitoa_base(temp, flags->base);
 		}
@@ -255,9 +256,9 @@ void	handle_l(char *input_string, int i, t_struct *flags)
 
 void	handle_ll(char *input_string, int i, t_struct *flags)
 {
-	if (flags->size_modifier == '0')
+	if (flags->size_modifier == 'L')
 	{
-		flags->size_modifier = 'L';
+		flags->size_modifier = '0';
 		if (flags->type == 'd' || flags->type == 'i')
 			flags->str_args = ft_itoa_base(va_arg(flags->args, long long), flags->base);
 		else
@@ -267,9 +268,9 @@ void	handle_ll(char *input_string, int i, t_struct *flags)
 
 void	handle_j(char *input_string, int i, t_struct *flags)
 {
-	if (flags->size_modifier == '0')
+	if (flags->size_modifier == 'j')
 	{
-		flags->size_modifier = 'j';
+		flags->size_modifier = 'J';
 		if (flags->type == 'd' || flags->type == 'i')
 			flags->str_args = ft_itoa_base(va_arg(flags->args, intmax_t), flags->base);
 		else
@@ -279,9 +280,9 @@ void	handle_j(char *input_string, int i, t_struct *flags)
 
 void	handle_z(char *input_string, int i, t_struct *flags)
 {
-	if (flags->size_modifier == '0')
+	if (flags->size_modifier == 'z')
 	{
-		flags->size_modifier = 'z';
+		flags->size_modifier = 'Z';
 		if (flags->type == 'd' || flags->type == 'i')
 			flags->str_args = ft_itoa_base(va_arg(flags->args, size_t), flags->base);
 		else
