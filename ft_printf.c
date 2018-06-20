@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 13:56:20 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 15:07:14 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ void	populate_struct(char *input_string, int i, t_struct *flags)
 	{
 		if (input_string[i] == '.')
 			flags->precision = ft_atoi(&input_string[i + 1]);
-		if (input_string[i] == '0')
+		else if (input_string[i] == '0' && flags->width < 0 && flags->precision < 0)
 			flags->zero = '1';
 		else if (ft_isdigit(input_string[i]) && flags->width < 0)
 			flags->width = ft_atoi(&input_string[i]);
-		if (input_string[i] == ' ')
+		else if (input_string[i] == ' ')
 			flags->space = '1';
-		if (input_string[i] == '+')
+		else if (input_string[i] == '+')
 			flags->plus = '1';
-		if (input_string[i] == '-')
+		else if (input_string[i] == '-')
 			flags->minus = '1';
 	}
 	flags->type = input_string[i];
