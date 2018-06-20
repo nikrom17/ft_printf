@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 11:59:56 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 11:40:11 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 13:37:32 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct		s_flags
 	char			zero;
 	char			plus;
 	char			minus;
-	char			width;
+	int				width;
 	int				base;
 	char			space;
 	int				precision;
