@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 13:29:28 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 13:31:39 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ int		ft_printf(char *input_string, ...)
 		if (input_string[i] == '%')
 		{
 			populate_struct(input_string, i, flags);
+			cancel_conflicts(input_string, i, flags);
 			find_conversion_specifier(input_string, i, flags);
 			i = handle_perc(input_string, ++i, flags);
 		}
