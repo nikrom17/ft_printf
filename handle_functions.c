@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 20:15:27 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 20:37:46 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -164,10 +164,13 @@ void	handle_hash(char *input_string, int i, t_struct *flags)
 	}
 	else
 	{
-		if (flags->width == '0')
-			flags->hash = ft_strdup("0");
-		else
-			flags->str_args = ft_strjoin("0", flags->str_args);
+		if (flags->str_args[0] != '0')
+		{
+			if (flags->width == '0')
+				flags->hash = ft_strdup("0");
+			else
+				flags->str_args = ft_strjoin("0", flags->str_args);
+		}
 	}
 }
 
