@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 17:02:49 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 20:15:27 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	handle_zero(char *input_string, int i, t_struct *flags)
 
 void	handle_space(char *input_string, int i, t_struct *flags)
 {
-	if ((flags->type == 'd' || flags->type =='i') && flags->space == '1' && flags->minus != '1')
+	if ((flags->type == 'd' || flags->type =='i') && flags->space == '1' && flags->neg != '1')
 	{
 		flags->str_args = ft_strjoin(" ", flags->str_args);
 		flags->space = '0';
