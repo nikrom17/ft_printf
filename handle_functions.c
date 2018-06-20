@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 21:03:46 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 21:06:24 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -339,9 +339,7 @@ void	handle_pointer(char *input_string, int i, t_struct *flags)
 	if (flags->flag != 'p')
 	{
 		flags->str_args = ft_uitoa_base(va_arg(flags->args, unsigned long long), 16);
-		flags->type = 'x';
-		handle_hash(input_string, i, flags);
-		flags->type = 'p';
+		flags->str_args = ft_strjoin("0x", flags->str_args);
 		flags->flag = 'p';
 	}
 	else
