@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 21:20:11 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/19 21:25:01 by nroman           ###   ########.fr       */
 /*                                                                            */
  /* ************************************************************************** */
 
@@ -134,11 +134,14 @@ void	handle_percent(char *input_string, int i, t_struct *flags)
 void	handle_minus(char *input_string, int i, t_struct *flags)
 {
 	flags->minus = '1';
+	if (flags->zero == '1')
+		flags->zero = '0';
 }
 
 void	handle_zero(char *input_string, int i, t_struct *flags)
 {
-	flags->zero = '1';
+	if (flags->minus == '0')
+		flags->zero = '1';
 }
 
 
