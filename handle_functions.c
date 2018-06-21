@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 11:42:16 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 13:16:45 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 	int		len;
 	char	*str;
 	char	fill;
+	char	*temp;
 
 	if (!flags->flag)
 	{
@@ -62,7 +63,9 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 			if (flags->minus == '1')
 			{
 				str = ft_strnew(len, fill);
-				flags->str_args = ft_strjoin(flags->str_args, str);
+				temp = ft_strjoin(flags->str_args, str);
+				free(flags->str_args);
+				flags->str_args = temp;
 			//	free(str);
 			}
 			else
@@ -94,6 +97,7 @@ void	handle_precision_helper(char *input_string, int i, t_struct *flags)
 {
 	char	*str_cpy;
 	int		len;
+	char	*temp;
 
 	len = ft_strlen(flags->str_args);
 	if (flags->plus == '2' || flags->neg == '1')
@@ -111,7 +115,9 @@ void	handle_precision_helper(char *input_string, int i, t_struct *flags)
 		}
 		if (!ft_strcmp(flags->hash, " "))
 			str_cpy = ft_strjoin(flags->hash, str_cpy);
-		flags->str_args = ft_strjoin(str_cpy, flags->str_args);
+		temp = ft_strjoin(str_cpy, flags->str_args);
+		free(flags->str_args);
+		flags->str_args = temp;
 		//free(str_cpy);
 	}
 }
