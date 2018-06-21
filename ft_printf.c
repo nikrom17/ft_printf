@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 11:18:35 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 11:37:21 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,44 @@ void		cancel_conflicts(char *input_string, int i, t_struct *flags)
 		flags->zero = '0';
 }
 
+
+
+void		reset_struct(t_struct *flags)
+{
+	free(flags->hash);
+	flags->hash = NULL;
+	flags->flag = 0;
+	flags->zero = '0';
+	flags->plus = '0';
+	flags->minus = '0';
+	flags->width = -1;
+	flags->base = 10;
+	flags->space = '0';
+	flags->precision = -1;
+	flags->type = '0';
+	flags->size_modifier = '0';
+	flags->neg = '0';
+	//free(flags->str_args);
+	//flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
+	//ft_strclr(flags->str_args);
+	//flags->str_args[0] = 0;
+	//free(flags->str_wide);
+	//flags->str_wide = (wchar_t *)ft_memalloc(sizeof(wchar_t) * 2);
+	flags->c = '0';
+}
+
+void		free_struct(t_struct *flags)
+{
+
+	if (flags->str_args)
+		free(flags->str_args);
+	//if (flags->str_wide)
+	//	free(flags->str_wide);
+	if (flags->hash)
+		free(flags->hash);
+	free(flags); 
+}
+
 t_struct	*init_struct(void)
 {
 	t_struct	*flags;
@@ -132,46 +170,10 @@ t_struct	*init_struct(void)
 	flags->size_modifier = '0';
 	flags->neg = '0';
 	flags->chars_printed = 0;
-	flags->str_args = (char *)ft_memalloc(sizeof(wchar_t) * 2); 
+	flags->str_args = NULL; 
 	flags->c = '0';
-	flags->str_wide = (wchar_t *)ft_memalloc(sizeof(wchar_t) * 2);
+	flags->str_wide = NULL;
 	return (flags);
-}
-
-void		reset_struct(t_struct *flags)
-{
-	free(flags->hash);
-	flags->hash = NULL;
-	flags->flag = 0;
-	flags->zero = '0';
-	flags->plus = '0';
-	flags->minus = '0';
-	flags->width = -1;
-	flags->base = 10;
-	flags->space = '0';
-	flags->precision = -1;
-	flags->type = '0';
-	flags->size_modifier = '0';
-	flags->neg = '0';
-	free(flags->str_args);
-	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
-	//ft_strclr(flags->str_args);
-	//flags->str_args[0] = 0;
-	//free(flags->str_wide);
-	//flags->str_wide = (wchar_t *)ft_memalloc(sizeof(wchar_t) * 2);
-	flags->c = '0';
-}
-
-void		free_struct(t_struct *flags)
-{
-
-	if (flags->str_args)
-		free(flags->str_args);
-	//if (flags->str_wide)
-	//	free(flags->str_wide);
-	if (flags->hash)
-		free(flags->hash);
-	free(flags); 
 }
 
 int			ft_printf(char *input_string, ...)
@@ -200,6 +202,6 @@ int			ft_printf(char *input_string, ...)
 	}
 	chars = flags->chars_printed;
 	va_end(flags->args);
-	free_struct(flags);
+	//free_struct(flags);
 	return (chars);
 }
