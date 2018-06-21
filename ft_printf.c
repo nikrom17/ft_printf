@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 13:42:42 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 13:44:11 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,6 @@ int			ft_printf(char *input_string, ...)
 	}
 	chars = flags->chars_printed;
 	va_end(flags->args);
-	free(flags);
+	free_struct(flags);
 	return (chars);
 }
