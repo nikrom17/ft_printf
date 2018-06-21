@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 17:30:14 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 17:32:49 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	handle_integer(char *input_string, int i, t_struct *flags)
 void	handle_string(char *input_string, int i, t_struct *flags)
 {
 	int		j;
-
+	int		len;
 	j = -1;
-	flags->chars_printed += ft_strlen(flags->str_args);
+
+	len = ft_strlen(flags->str_args);
+	flags->chars_printed += len;
 	if (flags->type == 's')
-	{
-		ft_putstr(flags->str_args);
-	}
+		write(1,flags->str_args, len);
 	else
 	{
 		while (flags->str_wide[++j])
