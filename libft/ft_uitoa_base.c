@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 20:09:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 19:19:03 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 08:50:18 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 char	*ft_uitoa_base(unsigned long long int nb, int base)
 {
 	long long int		i;
-	int					len;
 	char				*res;
 	int					temp;
 
 	i = 0;
 	if (nb == 0)
 		return (ft_strdup("0"));
-	len = ft_numlen(nb);
 	res = (char *)malloc(sizeof(char) + 17);
 	if (!res)
 		return (NULL);

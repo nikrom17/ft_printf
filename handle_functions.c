@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 19:51:45 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 09:17:33 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 			fill = ' ';
 		if (flags->precision >= 0)
 			handle_precision(input_string, i, flags);
-		if ((len = flags->width -
-			ft_strlen(flags->str_args)) > 0)
+		if ((len = flags->width - ft_strlen(flags->str_args)) > 0)
 		{
 			if (flags->minus == '1')
 			{
@@ -125,6 +124,7 @@ void	handle_precision(char *input_string, int i, t_struct *flags)
 			str_cpy = ft_strdup(flags->str_args);
 			str_cpy[flags->precision] = 0;
 			flags->str_args = str_cpy;
+			//free(str_cpy);
 		}
 	}
 	else
@@ -176,6 +176,7 @@ void	handle_space(char *input_string, int i, t_struct *flags)
 		else
 			flags->hash = temp;
 		flags->space = '0';
+		//free(temp);
 	}
 }
 

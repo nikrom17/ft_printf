@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 20:15:20 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 09:18:30 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,6 @@ void		pop_struct_helper(char *input_string, int i, t_struct *flags)
 
 void		populate_struct(char *input_string, int i, t_struct *flags)
 {
-	char	modifier;
-
-	modifier = 0;
 	while (table_index[input_string[++i] - 32] < 15)
 	{
 		if (input_string[i] == '.')
@@ -155,8 +152,18 @@ void		reset_struct(t_struct *flags)
 	flags->type = '0';
 	flags->size_modifier = '0';
 	flags->neg = '0';
+	free(flags->str_args);
 	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
 	flags->c = '0';
+}
+
+void		free_struct(t_struct *flags)
+{
+	free(flags->str_args);
+	free(flags->str_wide);
+	free(flags);
+	if (flags->hash)
+		free(flags->hash);
 }
 
 int			ft_printf(char *input_string, ...)
@@ -182,6 +189,7 @@ int			ft_printf(char *input_string, ...)
 			write(1, &input_string[i], 1);
 		}
 	}
+	free_struct(flags);
 	va_end(flags->args);
 	return (flags->chars_printed);
 }
