@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 09:41:24 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 09:42:34 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void		reset_struct(t_struct *flags)
 void		free_struct(t_struct *flags)
 {
 	if (flags->str_args)
-		free(flags->str_args);
+		//free(flags->str_args);
 	if (flags->str_wide)
 		//free(flags->str_wide);
 	if (flags->hash)
