@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 13:33:36 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 13:35:15 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void		reset_struct(t_struct *flags)
 	flags->type = '0';
 	flags->size_modifier = '0';
 	flags->neg = '0';
-	free(flags->str_args);
+	//free(flags->str_args);
 	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
 	//ft_strclr(flags->str_args);
 	//flags->str_args[0] = 0;
@@ -143,8 +143,8 @@ void		free_struct(t_struct *flags)
 
 	if (flags->str_args)
 		free(flags->str_args);
-	//if (flags->str_wide)
-	//	free(flags->str_wide);
+	if (flags->str_wide)
+		free(flags->str_wide);
 	if (flags->hash)
 		free(flags->hash);
 	free(flags); 
@@ -170,7 +170,7 @@ t_struct	*init_struct(void)
 	flags->chars_printed = 0;
 	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2); 
 	flags->c = '0';
-	flags->str_wide = NULL;
+	flags->str_wide = (char *)ft_memalloc(sizeof(char) * 2);
 	return (flags);
 }
 
@@ -178,7 +178,7 @@ int			ft_printf(char *input_string, ...)
 {
 	int			i;
 	int			chars;
-	static t_struct	*flags;
+	t_struct	*flags;
 
 	flags = init_struct();
 	va_start(flags->args, input_string);
