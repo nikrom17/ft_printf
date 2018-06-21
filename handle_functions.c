@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 15:23:54 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 15:37:11 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 					str = ft_strrplc(str, flags->hash);
 				temp = ft_strjoin(str, flags->str_args);
 				free(flags->str_args);
-				flags->str_args = temp;
 				free(str);
+				flags->str_args = temp;
 			}
 		}
 	}
@@ -315,7 +315,7 @@ void	handle_ll(char *input_string, int i, t_struct *flags)
 
 void	handle_j(char *input_string, int i, t_struct *flags)
 {
-
+/*
 	if (flags->size_modifier == 'j')
 	{
 		flags->size_modifier = 'J';
@@ -325,7 +325,7 @@ void	handle_j(char *input_string, int i, t_struct *flags)
 		else
 			flags->str_args = ft_uitoa_base(
 				va_arg(flags->args, uintmax_t), flags->base);
-	}
+	} */
 }
 
 void	handle_z(char *input_string, int i, t_struct *flags)
