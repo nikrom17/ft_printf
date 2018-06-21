@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 11:39:26 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 11:51:43 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void		reset_struct(t_struct *flags)
 	flags->size_modifier = '0';
 	flags->neg = '0';
 	//free(flags->str_args);
-	//flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
+	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
 	//ft_strclr(flags->str_args);
 	//flags->str_args[0] = 0;
 	//free(flags->str_wide);
