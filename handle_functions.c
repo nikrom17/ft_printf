@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 10:40:58 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 10:54:59 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,7 +297,7 @@ void	handle_ll(char *input_string, int i, t_struct *flags)
 
 void	handle_j(char *input_string, int i, t_struct *flags)
 {
-
+/*
 	if (flags->size_modifier == 'j')
 	{
 		flags->size_modifier = 'J';
@@ -307,7 +307,7 @@ void	handle_j(char *input_string, int i, t_struct *flags)
 		else
 			flags->str_args = ft_uitoa_base(
 				va_arg(flags->args, uintmax_t), flags->base);
-	}
+	} */
 }
 
 void	handle_z(char *input_string, int i, t_struct *flags)
