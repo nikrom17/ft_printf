@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 10:30:49 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 10:38:04 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void		reset_struct(t_struct *flags)
 	flags->zero = '0';
 	flags->plus = '0';
 	flags->minus = '0';
-	flags->width = 1;
+	flags->width = -1;
 	flags->base = 10;
 	flags->space = '0';
 	flags->precision = -1;
