@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 10:18:15 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 10:33:13 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	handle_precision_helper(char *input_string, int i, t_struct *flags)
 		if (!ft_strcmp(flags->hash, " "))
 			str_cpy = ft_strjoin(flags->hash, str_cpy);
 		flags->str_args = ft_strjoin(str_cpy, flags->str_args);
-		free(str_cpy);
+		//free(str_cpy);
 	}
 }
 
@@ -150,7 +150,7 @@ void	handle_plus(char *input_string, int i, t_struct *flags)
 		{
 			plus = ft_strnew(1, '+');
 			flags->str_args = ft_strjoin(plus, flags->str_args);
-			free(plus);
+			//free(plus);
 		}
 
 	}
