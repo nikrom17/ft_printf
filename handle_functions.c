@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 13:44:55 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 13:53:17 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	handle_integer(char *input_string, int i, t_struct *flags)
 	len = ft_strlen(flags->str_args);
 	flags->chars_printed += len;
 	write(1, flags->str_args, len);
+	free(flags->str_args);
+	flags->str_args = NULL;
 }
 
 void	handle_string(char *input_string, int i, t_struct *flags)
@@ -40,6 +42,8 @@ void	handle_string(char *input_string, int i, t_struct *flags)
 			handle_wcharacter(input_string, i, flags);
 		}
 	}
+	free(flags->str_args);
+	flags->str_args = NULL;
 }
 
 void	handle_width(char *input_string, int i, t_struct *flags)
