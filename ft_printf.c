@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 14:58:00 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 15:00:19 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ void		populate_struct(char *input_string, int i, t_struct *flags)
 {
 	while (table_index[input_string[++i] - 32] < 15)
 	{
-		if (flags->hash)
-		free(flags->hash);	if (input_string[i] == '.')
+		if (input_string[i] == '.')
 			flags->precision = ft_atoi(&input_string[i + 1]);
 		else if (input_string[i] == '0' && flags->width < 0
 			&& flags->precision < 0)
