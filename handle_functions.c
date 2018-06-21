@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 15:58:13 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 16:01:23 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 				flags->str_args = temp;
 			}
 			else
-				handle_width_helper(fill, i, flags);
+				handle_width_helper(fill, len, flags);
 		}
 	}
 }
