@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 15:21:50 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 15:23:54 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 				temp = ft_strjoin(str, flags->str_args);
 				free(flags->str_args);
 				flags->str_args = temp;
+				free(str);
 			}
 		}
 	}
