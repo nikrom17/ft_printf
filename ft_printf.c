@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 09:29:40 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 09:40:06 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ void		free_struct(t_struct *flags)
 int			ft_printf(char *input_string, ...)
 {
 	int			i;
+	int			chars;
 	t_struct	*flags;
 
 	flags = init_struct();
@@ -193,7 +194,8 @@ int			ft_printf(char *input_string, ...)
 			write(1, &input_string[i], 1);
 		}
 	}
-	free_struct(flags);
+	chars = flags->chars_printed;
 	va_end(flags->args);
-	return (flags->chars_printed);
+	free_struct(flags);
+	return (chars);
 }
