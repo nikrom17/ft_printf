@@ -1,12 +1,12 @@
-/**************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/28 18:57:25 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 15:07:14 by nroman           ###   ########.fr       */
+/*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
+/*   Updated: 2018/06/20 19:18:08 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,28 @@
 void		convert_nums(char *input_string, int i, t_struct *flags)
 {
 	if (flags->size_modifier != '0')
-		jump_table[table_index[flags->size_modifier - 32]](input_string, i, flags);
+		jump_table[table_index
+			[flags->size_modifier - 32]](input_string, i, flags);
 	else if (flags->type == 'd' || flags->type == 'i')
-		flags->str_args = ft_itoa_base(va_arg(flags->args, int), flags->base); 
+		flags->str_args = ft_itoa_base(va_arg(flags->args, int), flags->base);
 	else
-		flags->str_args = ft_itoa_base(va_arg(flags->args, unsigned  int), flags->base);
+		flags->str_args = ft_itoa_base(
+			va_arg(flags->args, unsigned int), flags->base);
 	if (flags->str_args[0] == '-')
-		flags->neg ='1';
+		flags->neg = '1';
 }
 
-void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
+void		find_conversion_specifier
+	(char *input_string, int i, t_struct *flags)
 {
 	if (table_index[flags->type - 32] < 20)
 		convert_nums(input_string, i, flags);
-	else if (table_index[flags->type - 32] == 21) //%%
+	else if (table_index[flags->type - 32] == 21)
 		flags->str_args[0] = '%';
 	else if (table_index[flags->type - 32] > 21)
 		flags->c = va_arg(flags->args, int);
-	else if (flags->type == 'S' || (flags->type == 's' && flags->size_modifier == 'l'))
+	else if (flags->type == 'S' || (flags->type == 's'
+		&& flags->size_modifier == 'l'))
 	{
 		flags->str_wide = va_arg(flags->args, wchar_t *);
 		flags->type = 'S';
@@ -45,49 +49,32 @@ void	find_conversion_specifier(char *input_string, int i, t_struct *flags)
 		flags->str_args = ft_strdup("(null)");
 }
 
-int		handle_perc(char *input_string, int i, t_struct *flags)
+int			handle_perc(char *input_string, int i, t_struct *flags)
 {
-	int		TI;
+	int		ti;
 	int		flag;
 
 	flag = 1;
 	while (flag)
 	{
-		if ((TI = table_index[input_string[i] - 32]) > 14)
+		if ((ti = table_index[input_string[i] - 32]) > 14)
 			flag = 0;
-		jump_table[TI](input_string, i++, flags);
+		jump_table[ti](input_string, i++, flags);
 	}
 	reset_struct(flags);
 	return (i - 1);
 }
 
-void	populate_struct(char *input_string, int i, t_struct *flags)
+void		pop_struct_helper(char *input_string, int i, t_struct *flags)
 {
-	char	modifier;
-
-	modifier = 0;
-	while (table_index[input_string[++i] - 32] < 15)
-	{
-		if (input_string[i] == '.')
-			flags->precision = ft_atoi(&input_string[i + 1]);
-		else if (input_string[i] == '0' && flags->width < 0 && flags->precision < 0)
-			flags->zero = '1';
-		else if (ft_isdigit(input_string[i]) && flags->width < 0)
-			flags->width = ft_atoi(&input_string[i]);
-		else if (input_string[i] == ' ')
-			flags->space = '1';
-		else if (input_string[i] == '+')
-			flags->plus = '1';
-		else if (input_string[i] == '-')
-			flags->minus = '1';
-	}
 	flags->type = input_string[i];
 	if (input_string[i] == 'x' || input_string[i] == 'X')
 		flags->base = 16;
 	if (input_string[i] == 'o' || input_string[i] == 'O')
 		flags->base = 8;
-	if (input_string[i] == 'U' || input_string[i] == 'D' || input_string[i] == 'S' || input_string[i] == 'C')
-			flags->size_modifier = 'l';
+	if (input_string[i] == 'U' || input_string[i] == 'D'
+		|| input_string[i] == 'S' || input_string[i] == 'C')
+		flags->size_modifier = 'l';
 	if (input_string[i] == 'p')
 		flags->size_modifier = 'P';
 	if (ft_isalpha(input_string[i - 1]))
@@ -98,14 +85,37 @@ void	populate_struct(char *input_string, int i, t_struct *flags)
 	}
 }
 
-void	cancel_conflicts(char *input_string, int i, t_struct *flags)
+void		populate_struct(char *input_string, int i, t_struct *flags)
+{
+	char	modifier;
+
+	modifier = 0;
+	while (table_index[input_string[++i] - 32] < 15)
+	{
+		if (input_string[i] == '.')
+			flags->precision = ft_atoi(&input_string[i + 1]);
+		else if (input_string[i] == '0' && flags->width < 0
+			&& flags->precision < 0)
+			flags->zero = '1';
+		else if (ft_isdigit(input_string[i]) && flags->width < 0)
+			flags->width = ft_atoi(&input_string[i]);
+		else if (input_string[i] == ' ')
+			flags->space = '1';
+		else if (input_string[i] == '+')
+			flags->plus = '1';
+		else if (input_string[i] == '-')
+			flags->minus = '1';
+	}
+	pop_struct_helper(input_string, i, flags);
+}
+
+void		cancel_conflicts(char *input_string, int i, t_struct *flags)
 {
 	if (flags->plus == '1' && flags->space == '1')
 		flags->space = '0';
 	if (flags->zero == '1' && flags->minus == '1')
 		flags->zero = '0';
 }
-
 
 t_struct	*init_struct(void)
 {
@@ -131,8 +141,7 @@ t_struct	*init_struct(void)
 	return (flags);
 }
 
-
-void	reset_struct(t_struct *flags)
+void		reset_struct(t_struct *flags)
 {
 	flags->hash = NULL;
 	flags->flag = 0;
@@ -145,12 +154,12 @@ void	reset_struct(t_struct *flags)
 	flags->precision = -1;
 	flags->type = '0';
 	flags->size_modifier = '0';
-	flags->neg = '0'; 
+	flags->neg = '0';
 	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
 	flags->c = '0';
 }
 
-int		ft_printf(char *input_string, ...)
+int			ft_printf(char *input_string, ...)
 {
 	int			i;
 	t_struct	*flags;

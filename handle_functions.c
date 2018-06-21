@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 17:41:50 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 19:51:45 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,22 @@
 void	handle_integer(char *input_string, int i, t_struct *flags)
 {
 	int		len;
+
 	len = ft_strlen(flags->str_args);
 	flags->chars_printed += len;
-	write(1,flags->str_args, len);
+	write(1, flags->str_args, len);
 }
 
 void	handle_string(char *input_string, int i, t_struct *flags)
 {
 	int		j;
 	int		len;
-	j = -1;
 
+	j = -1;
 	len = ft_strlen(flags->str_args);
 	flags->chars_printed += len;
 	if (flags->type == 's')
-		write(1,flags->str_args, len);
+		write(1, flags->str_args, len);
 	else
 	{
 		while (flags->str_wide[++j])
@@ -56,7 +57,8 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 			fill = ' ';
 		if (flags->precision >= 0)
 			handle_precision(input_string, i, flags);
-		if ((len = flags->width - ft_strlen(flags->str_args)) > 0)
+		if ((len = flags->width -
+			ft_strlen(flags->str_args)) > 0)
 		{
 			if (flags->minus == '1')
 			{
@@ -65,7 +67,9 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 			}
 			else
 			{
-				if (flags->width > flags->precision && table_index[flags->type - 32] < 20 && flags->zero == '1' && flags->precision >= 0)
+				if (flags->width > flags->precision &&
+					table_index[flags->type - 32] < 20
+						&& flags->zero == '1' && flags->precision >= 0)
 					fill = ' ';
 				str = ft_strnew(flags->width, fill);
 				str[len] = 0;
@@ -81,48 +85,50 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 					str = ft_strrplc(str, flags->hash);
 				flags->str_args = ft_strcat(str, flags->str_args);
 			}
-			//free(str);
 		}
 	}
 }
 
-void    handle_precision(char *input_string, int i, t_struct *flags)
+void	handle_precision_helper(char *input_string, int i, t_struct *flags)
 {
 	char	*str_cpy;
 	int		len;
 
+	len = ft_strlen(flags->str_args);
+	if (flags->plus == '2' || flags->neg == '1')
+		len--;
+	if (flags->precision > len)
+	{
+		str_cpy = ft_strnew(flags->precision - len, '0');
+		if (flags->plus == '2' || flags->neg == '1')
+		{
+			flags->str_args[0] = '0';
+			if (flags->neg == '1')
+				str_cpy[0] = '-';
+			else
+				str_cpy[0] = '+';
+		}
+		if (!ft_strcmp(flags->hash, " "))
+			str_cpy = ft_strjoin(flags->hash, str_cpy);
+		flags->str_args = ft_strjoin(str_cpy, flags->str_args);
+	}
+}
+
+void	handle_precision(char *input_string, int i, t_struct *flags)
+{
+	char	*str_cpy;
+
 	if (flags->type == 's')
 	{
-		if (flags->precision <  ft_strlen(flags->str_args))
+		if (flags->precision < ft_strlen(flags->str_args))
 		{
 			str_cpy = ft_strdup(flags->str_args);
 			str_cpy[flags->precision] = 0;
 			flags->str_args = str_cpy;
-			//free(str_cpy);
 		}
 	}
 	else
-	{
-		len = ft_strlen(flags->str_args);
-		if (flags->plus == '2' || flags->neg == '1')
-			len--;
-		if (flags->precision > len)
-		{
-			str_cpy = ft_strnew(flags->precision - len, '0');
-			if (flags->plus == '2' || flags->neg == '1')
-			{
-				flags->str_args[0] = '0';
-				if (flags->neg == '1')
-					str_cpy[0] = '-';
-				else
-					str_cpy[0] = '+';
-			}
-			if (!ft_strcmp(flags->hash, " "))
-				str_cpy = ft_strjoin(flags->hash, str_cpy);
-			flags->str_args = ft_strjoin(str_cpy, flags->str_args);
-		}
-	}
-
+		handle_precision_helper(input_string, i, flags);
 }
 
 void	handle_plus(char *input_string, int i, t_struct *flags)
@@ -151,20 +157,18 @@ void	handle_percent(char *input_string, int i, t_struct *flags)
 
 void	handle_minus(char *input_string, int i, t_struct *flags)
 {
-	//don't need this
 }
 
 void	handle_zero(char *input_string, int i, t_struct *flags)
 {
-	//don't need this
 }
-
 
 void	handle_space(char *input_string, int i, t_struct *flags)
 {
 	char	*temp;
 
-	if ((flags->type == 'd' || flags->type =='i') && flags->space == '1' && flags->neg != '1' && flags->plus == '0')
+	if ((flags->type == 'd' || flags->type == 'i') && flags->space == '1'
+		&& flags->neg != '1' && flags->plus == '0')
 	{
 		temp = ft_strnew(1, ' ');
 		if (flags->width < 0 && flags->precision < 0)
@@ -172,6 +176,17 @@ void	handle_space(char *input_string, int i, t_struct *flags)
 		else
 			flags->hash = temp;
 		flags->space = '0';
+	}
+}
+
+void	handle_hash_helper(char *input_string, int i, t_struct *flags)
+{
+	if (flags->str_args[0] != '0')
+	{
+		if (flags->width > 0 && flags->zero == '1')
+			flags->hash = ft_strdup("0");
+		else
+			flags->str_args = ft_strjoin("0", flags->str_args);
 	}
 }
 
@@ -198,25 +213,15 @@ void	handle_hash(char *input_string, int i, t_struct *flags)
 		}
 	}
 	else
-	{
-		if (flags->str_args[0] != '0')
-		{
-			if (flags->width > 0 && flags->zero == '1')
-				flags->hash = ft_strdup("0");
-			else
-				flags->str_args = ft_strjoin("0", flags->str_args);
-		}
-	}
+		handle_hash_helper(input_string, i, flags);
 }
 
 void	handle_backslash(char *input_string, int i, t_struct *flags)
 {
-	//code here
 }
 
 void	handle_asterisk(char *input_string, int i, t_struct *flags)
 {
-	//code here
 }
 
 void	handle_h(char *input_string, int i, t_struct *flags)
@@ -225,9 +230,11 @@ void	handle_h(char *input_string, int i, t_struct *flags)
 	{
 		flags->size_modifier = '0';
 		if (flags->type == 'd' || flags->type == 'i')
-			flags->str_args = ft_itoa_base((short)va_arg(flags->args, int), flags->base);
+			flags->str_args = ft_itoa_base((short)
+				va_arg(flags->args, int), flags->base);
 		else
-			flags->str_args = ft_uitoa_base((unsigned short)va_arg(flags->args, int), flags->base);
+			flags->str_args = ft_uitoa_base((unsigned short)
+				va_arg(flags->args, int), flags->base);
 	}
 }
 
@@ -237,16 +244,18 @@ void	handle_hh(char *input_string, int i, t_struct *flags)
 	{
 		flags->size_modifier = '0';
 		if (flags->type == 'd' || flags->type == 'i')
-		flags->str_args = ft_itoa_base((signed char)va_arg(flags->args, int), flags->base);
+			flags->str_args = ft_itoa_base((signed char)
+				va_arg(flags->args, int), flags->base);
 		else
-			flags->str_args = ft_uitoa_base((unsigned char)va_arg(flags->args, int), flags->base);
+			flags->str_args = ft_uitoa_base((unsigned char)
+				va_arg(flags->args, int), flags->base);
 	}
 }
 
 void	handle_l(char *input_string, int i, t_struct *flags)
 {
 	size_t		temp;
-	
+
 	if (flags->size_modifier == 'l' && flags->type != 's')
 	{
 		flags->size_modifier = '0';
@@ -270,9 +279,11 @@ void	handle_ll(char *input_string, int i, t_struct *flags)
 	{
 		flags->size_modifier = '0';
 		if (flags->type == 'd' || flags->type == 'i')
-			flags->str_args = ft_itoa_base(va_arg(flags->args, long long), flags->base);
+			flags->str_args = ft_itoa_base(
+				va_arg(flags->args, long long), flags->base);
 		else
-			flags->str_args = ft_uitoa_base(va_arg(flags->args, unsigned long long), flags->base);
+			flags->str_args = ft_uitoa_base(
+				va_arg(flags->args, unsigned long long), flags->base);
 	}
 }
 
@@ -282,9 +293,11 @@ void	handle_j(char *input_string, int i, t_struct *flags)
 	{
 		flags->size_modifier = 'J';
 		if (flags->type == 'd' || flags->type == 'i')
-			flags->str_args = ft_itoa_base(va_arg(flags->args, intmax_t), flags->base);
+			flags->str_args = ft_itoa_base(
+				va_arg(flags->args, intmax_t), flags->base);
 		else
-			flags->str_args = ft_uitoa_base(va_arg(flags->args, uintmax_t), flags->base);
+			flags->str_args = ft_uitoa_base(
+				va_arg(flags->args, uintmax_t), flags->base);
 	}
 }
 
@@ -294,9 +307,11 @@ void	handle_z(char *input_string, int i, t_struct *flags)
 	{
 		flags->size_modifier = 'Z';
 		if (flags->type == 'd' || flags->type == 'i')
-			flags->str_args = ft_itoa_base(va_arg(flags->args, size_t), flags->base);
+			flags->str_args = ft_itoa_base(
+				va_arg(flags->args, size_t), flags->base);
 		else
-			flags->str_args = ft_uitoa_base(va_arg(flags->args, size_t), flags->base);
+			flags->str_args = ft_uitoa_base(
+				va_arg(flags->args, size_t), flags->base);
 	}
 }
 
@@ -304,17 +319,16 @@ void	handle_unsigned(char *input_string, int i, t_struct *flags)
 {
 	flags->chars_printed += ft_strlen(flags->str_args);
 	ft_putstr(flags->str_args);
-
 }
 
 void	handle_octal(char *input_string, int i, t_struct *flags)
-{		
+{
 	int		j;
 
 	j = -1;
 	if (input_string[i] == 'O')
 	{
-		while(flags->str_args[++j])
+		while (flags->str_args[++j])
 			flags->str_args[j] = ft_toupper(flags->str_args[j]);
 	}
 	flags->chars_printed += ft_strlen(flags->str_args);
@@ -324,10 +338,11 @@ void	handle_octal(char *input_string, int i, t_struct *flags)
 void	handle_hex(char *input_string, int i, t_struct *flags)
 {
 	int		j;
+
 	j = -1;
 	if (input_string[i] == 'X')
 	{
-		while(flags->str_args[++j])
+		while (flags->str_args[++j])
 			flags->str_args[j] = ft_toupper(flags->str_args[j]);
 	}
 	flags->chars_printed += ft_strlen(flags->str_args);
@@ -336,7 +351,6 @@ void	handle_hex(char *input_string, int i, t_struct *flags)
 
 void	handle_float(char *input_string, int i, t_struct *flags)
 {
-	//code here
 }
 
 void	handle_character(char *input_string, int i, t_struct *flags)
@@ -369,7 +383,8 @@ void	handle_pointer(char *input_string, int i, t_struct *flags)
 {
 	if (flags->flag != 'p')
 	{
-		flags->str_args = ft_uitoa_base(va_arg(flags->args, unsigned long long), 16);
+		flags->str_args = ft_uitoa_base(
+			va_arg(flags->args, unsigned long long), 16);
 		flags->str_args = ft_strjoin("0x", flags->str_args);
 		flags->flag = 'p';
 	}

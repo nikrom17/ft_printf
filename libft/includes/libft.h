@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 19:34:51 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/19 12:17:35 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 19:25:25 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ char				*ft_strrev(char *str);
 int					ft_numlen(int nb);
 int					ft_isempty(const char *str);
 void				ft_lstadd_back(t_list **alst, t_list *new);
-void				ft_lst_link_del(t_list **begin_list, void *data_ref, int (*cmp)());
+void				ft_lst_link_del(t_list **begin_list,
+						void *data_ref, int (*cmp)());
 int					ft_is_ptr_eql(void *ptr1, void *ptr2);
 char				*ft_realloc_str(char *str, size_t size);
 char				*ft_strrplc(char *dest, char *const src);
