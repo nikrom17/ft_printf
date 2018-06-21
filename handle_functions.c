@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 17:07:02 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 17:21:01 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void	handle_hash(char *input_string, int i, t_struct *flags)
 	{
 		if (flags->str_args[0] != '0' || flags->type == 'p')
 		{
-			if (flags->width > 0)
+			if (flags->width > 0 && flags->zero == '1')
 				flags->hash = ft_strdup("0x");
 			else
 				flags->str_args = ft_strjoin("0x", flags->str_args);
@@ -189,7 +189,7 @@ void	handle_hash(char *input_string, int i, t_struct *flags)
 	{
 		if (flags->str_args[0] != '0')
 		{
-			if (flags->width > 0)
+			if (flags->width > 0 && flags->zero == '1')
 				flags->hash = ft_strdup("0X");
 			else
 				flags->str_args = ft_strjoin("0X", flags->str_args);
@@ -199,7 +199,7 @@ void	handle_hash(char *input_string, int i, t_struct *flags)
 	{
 		if (flags->str_args[0] != '0')
 		{
-			if (flags->width > 0)
+			if (flags->width > 0 && flags->zero == '1')
 				flags->hash = ft_strdup("0");
 			else
 				flags->str_args = ft_strjoin("0", flags->str_args);
