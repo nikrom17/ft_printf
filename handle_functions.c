@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 15:43:36 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 15:58:13 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	handle_integer(char *input_string, int i, t_struct *flags)
 	len = ft_strlen(flags->str_args);
 	flags->chars_printed += len;
 	write(1, flags->str_args, len);
-	//free(flags->str_args);
 	flags->str_args = NULL;
 }
 
@@ -42,14 +41,39 @@ void	handle_string(char *input_string, int i, t_struct *flags)
 			handle_wcharacter(input_string, i, flags);
 		}
 	}
-	//free(flags->str_args);
 	flags->str_args = NULL;
+}
+
+void	handle_width_helper(char fill, int len, t_struct *flags)
+{
+	char	*temp;
+	char	*str;
+
+	if (flags->width > flags->precision &&
+		table_index[flags->type - 32] < 20
+			&& flags->zero == '1' && flags->precision >= 0)
+		fill = ' ';
+	str = ft_strnew(flags->width, fill);
+	str[len] = 0;
+	if (flags->plus == '1' || (flags->neg == '1' && fill == '0'))
+	{
+		if (flags->neg == '1')
+			str[0] = '-';
+		else
+			str[0] = '+';
+		flags->str_args[0] = fill;
+	}
+	if (flags->hash)
+		str = ft_strrplc(str, flags->hash);
+	temp = ft_strjoin(str, flags->str_args);
+	free(flags->str_args);
+	free(str);
+	flags->str_args = temp;
 }
 
 void	handle_width(char *input_string, int i, t_struct *flags)
 {
 	int		len;
-	char	*str;
 	char	fill;
 	char	*temp;
 
@@ -66,35 +90,12 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 		{
 			if (flags->minus == '1')
 			{
-				str = ft_strnew(len, fill);
-				temp = ft_strjoin(flags->str_args, str);
+				temp = ft_strjoin(flags->str_args, ft_strnew(len, fill));
 				free(flags->str_args);
 				flags->str_args = temp;
-				free(str);
 			}
 			else
-			{
-				if (flags->width > flags->precision &&
-					table_index[flags->type - 32] < 20
-						&& flags->zero == '1' && flags->precision >= 0)
-					fill = ' ';
-				str = ft_strnew(flags->width, fill);
-				str[len] = 0;
-				if (flags->plus == '1' || (flags->neg == '1' && fill == '0'))
-				{
-					if (flags->neg == '1')
-						str[0] = '-';
-					else
-						str[0] = '+';
-					flags->str_args[0] = fill;
-				}
-				if (flags->hash)
-					str = ft_strrplc(str, flags->hash);
-				temp = ft_strjoin(str, flags->str_args);
-				free(flags->str_args);
-				free(str);
-				flags->str_args = temp;
-			}
+				handle_width_helper(fill, i, flags);
 		}
 	}
 }
@@ -124,7 +125,6 @@ void	handle_precision_helper(char *input_string, int i, t_struct *flags)
 		temp = ft_strjoin(str_cpy, flags->str_args);
 		free(flags->str_args);
 		flags->str_args = temp;
-		//free(str_cpy);
 	}
 }
 
@@ -139,7 +139,6 @@ void	handle_precision(char *input_string, int i, t_struct *flags)
 			str_cpy = ft_strdup(flags->str_args);
 			str_cpy[flags->precision] = 0;
 			flags->str_args = str_cpy;
-			//free(str_cpy);
 		}
 	}
 	else
@@ -162,7 +161,6 @@ void	handle_plus(char *input_string, int i, t_struct *flags)
 		{
 			plus = ft_strnew(1, '+');
 			flags->str_args = ft_strjoin(plus, flags->str_args);
-			//free(plus);
 		}
 
 	}
@@ -195,7 +193,6 @@ void	handle_space(char *input_string, int i, t_struct *flags)
 		else
 			flags->hash = temp;
 		flags->space = '0';
-		//free(temp);
 	}
 }
 
