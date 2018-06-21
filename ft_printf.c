@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 11:56:18 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 11:56:52 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,9 +178,9 @@ int			ft_printf(char *input_string, ...)
 {
 	int			i;
 	int			chars;
-	t_struct	*flags;
+	static t_struct	*flags;
 
-	static flags = init_struct();
+	flags = init_struct();
 	va_start(flags->args, input_string);
 	i = -1;
 	while (input_string[++i])
