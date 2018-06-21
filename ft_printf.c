@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 11:52:17 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 11:56:18 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ void		cancel_conflicts(char *input_string, int i, t_struct *flags)
 		flags->zero = '0';
 }
 
-
-
 void		reset_struct(t_struct *flags)
 {
 	free(flags->hash);
@@ -182,7 +180,7 @@ int			ft_printf(char *input_string, ...)
 	int			chars;
 	t_struct	*flags;
 
-	flags = init_struct();
+	static flags = init_struct();
 	va_start(flags->args, input_string);
 	i = -1;
 	while (input_string[++i])
