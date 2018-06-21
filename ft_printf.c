@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 11:37:21 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 11:39:26 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		find_conversion_specifier
 	}
 	else
 		flags->str_args = va_arg(flags->args, char *);
-	if (flags->str_args == NULL)
+	if (flags->str_args == NULL && flags->type != 'c')
 		flags->str_args = ft_strdup("(null)");
 }
 

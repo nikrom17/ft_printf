@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 11:33:19 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 11:42:16 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -367,7 +367,7 @@ void	handle_character(char *input_string, int i, t_struct *flags)
 	int		j;
 	int		len;
 
-	if (flags->str_args[0])
+	if (flags->str_args)
 	{
 		len = ft_strlen(flags->str_args);
 		len--;
