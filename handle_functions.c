@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 09:40:25 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 10:18:15 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 			{
 				str = ft_strnew(len, fill);
 				flags->str_args = ft_strjoin(flags->str_args, str);
+			//	free(str);
 			}
 			else
 			{
@@ -83,6 +84,7 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 				if (flags->hash)
 					str = ft_strrplc(str, flags->hash);
 				flags->str_args = ft_strcat(str, flags->str_args);
+				//free(str);
 			}
 		}
 	}
@@ -110,7 +112,7 @@ void	handle_precision_helper(char *input_string, int i, t_struct *flags)
 		if (!ft_strcmp(flags->hash, " "))
 			str_cpy = ft_strjoin(flags->hash, str_cpy);
 		flags->str_args = ft_strjoin(str_cpy, flags->str_args);
-		//free(str_cpy);
+		free(str_cpy);
 	}
 }
 
@@ -140,13 +142,17 @@ void	handle_plus(char *input_string, int i, t_struct *flags)
 	{
 		flags->plus = '2';
 		if (flags->zero == '1')
-			flags->hash = ft_strdup("+");
+		{
+			plus = ft_strnew(1, '+');
+			flags->hash = plus;
+		}
 		else
 		{
 			plus = ft_strnew(1, '+');
 			flags->str_args = ft_strjoin(plus, flags->str_args);
-			//free(plus);
+			free(plus);
 		}
+
 	}
 }
 
@@ -291,6 +297,7 @@ void	handle_ll(char *input_string, int i, t_struct *flags)
 
 void	handle_j(char *input_string, int i, t_struct *flags)
 {
+	/*
 	if (flags->size_modifier == 'j')
 	{
 		flags->size_modifier = 'J';
@@ -300,7 +307,7 @@ void	handle_j(char *input_string, int i, t_struct *flags)
 		else
 			flags->str_args = ft_uitoa_base(
 				va_arg(flags->args, uintmax_t), flags->base);
-	}
+	} */
 }
 
 void	handle_z(char *input_string, int i, t_struct *flags)
