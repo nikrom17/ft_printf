@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 14:29:35 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 14:30:22 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void		cancel_conflicts(char *input_string, int i, t_struct *flags)
 
 void		reset_struct(t_struct *flags)
 {
-	free(flags->hash);
+	//free(flags->hash);
 	flags->hash = NULL;
 	flags->flag = 0;
 	flags->zero = '0';
