@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 09:17:33 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 09:28:47 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	handle_plus(char *input_string, int i, t_struct *flags)
 		{
 			plus = ft_strnew(1, '+');
 			flags->str_args = ft_strjoin(plus, flags->str_args);
-			free(plus);
+			//free(plus);
 		}
 	}
 }
