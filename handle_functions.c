@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 13:16:45 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 13:30:57 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,39 +195,45 @@ void	handle_space(char *input_string, int i, t_struct *flags)
 
 void	handle_hash_helper(char *input_string, int i, t_struct *flags)
 {
-	if (flags->str_args[0] != '0')
+	if (flags->str_args)
 	{
-		if (flags->width > 0 && flags->zero == '1')
-			flags->hash = ft_strdup("0");
-		else
-			flags->str_args = ft_strjoin("0", flags->str_args);
+		if (flags->str_args[0] != '0')
+		{
+			if (flags->width > 0 && flags->zero == '1')
+				flags->hash = ft_strdup("0");
+			else
+				flags->str_args = ft_strjoin("0", flags->str_args);
+		}
 	}
 }
 
 void	handle_hash(char *input_string, int i, t_struct *flags)
 {
-	if (flags->type == 'x')
+	if (flags->str_args)
 	{
-		if (flags->str_args[0] != '0' || flags->type == 'p')
+		if (flags->type == 'x')
 		{
-			if (flags->width > 0 && flags->zero == '1')
-				flags->hash = ft_strdup("0x");
-			else
-				flags->str_args = ft_strjoin("0x", flags->str_args);
+			if (flags->str_args[0] != '0' || flags->type == 'p')
+			{
+				if (flags->width > 0 && flags->zero == '1')
+					flags->hash = ft_strdup("0x");
+				else
+					flags->str_args = ft_strjoin("0x", flags->str_args);
+			}
 		}
-	}
-	else if (flags->type == 'X')
-	{
-		if (flags->str_args[0] != '0')
+		else if (flags->type == 'X')
 		{
-			if (flags->width > 0 && flags->zero == '1')
-				flags->hash = ft_strdup("0X");
-			else
-				flags->str_args = ft_strjoin("0X", flags->str_args);
+			if (flags->str_args[0] != '0')
+			{
+				if (flags->width > 0 && flags->zero == '1')
+					flags->hash = ft_strdup("0X");
+				else
+					flags->str_args = ft_strjoin("0X", flags->str_args);
+			}
 		}
+		else
+			handle_hash_helper(input_string, i, flags);
 	}
-	else
-		handle_hash_helper(input_string, i, flags);
 }
 
 void	handle_backslash(char *input_string, int i, t_struct *flags)
