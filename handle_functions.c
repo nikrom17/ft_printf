@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 14:31:37 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 14:44:28 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,8 +169,8 @@ void	handle_plus(char *input_string, int i, t_struct *flags)
 
 void	handle_percent(char *input_string, int i, t_struct *flags)
 {
-	flags->chars_printed += ft_strlen(flags->str_args);
-	ft_putstr(flags->str_args);
+	flags->chars_printed++;
+	ft_putchar(flags->c);
 }
 
 void	handle_minus(char *input_string, int i, t_struct *flags)

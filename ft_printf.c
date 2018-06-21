@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 14:39:34 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 14:43:52 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		find_conversion_specifier
 	if (table_index[flags->type - 32] < 20)
 		convert_nums(input_string, i, flags);
 	else if (table_index[flags->type - 32] == 21)
-		flags->str_args[0] = '%';
+		flags->c = '%';
 	else if (table_index[flags->type - 32] > 21)
 		flags->c = va_arg(flags->args, int);
 	else if (flags->type == 'S' || (flags->type == 's'
