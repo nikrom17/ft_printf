@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 14:30:22 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 14:36:32 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void		populate_struct(char *input_string, int i, t_struct *flags)
 {
 	while (table_index[input_string[++i] - 32] < 15)
 	{
-		if (input_string[i] == '.')
+		if (flags->hash)
+		free(flags->hash);	if (input_string[i] == '.')
 			flags->precision = ft_atoi(&input_string[i + 1]);
 		else if (input_string[i] == '0' && flags->width < 0
 			&& flags->precision < 0)
@@ -116,7 +117,7 @@ void		cancel_conflicts(char *input_string, int i, t_struct *flags)
 
 void		reset_struct(t_struct *flags)
 {
-	//free(flags->hash);
+	free(flags->hash);
 	flags->hash = NULL;
 	flags->flag = 0;
 	flags->zero = '0';
@@ -129,7 +130,7 @@ void		reset_struct(t_struct *flags)
 	flags->type = '0';
 	flags->size_modifier = '0';
 	flags->neg = '0';
-	flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
+	 //flags->str_args = (char *)ft_memalloc(sizeof(char) * 2);
 	//ft_strclr(flags->str_args);
 	//flags->str_args[0] = 0;
 	//free(flags->str_wide);
