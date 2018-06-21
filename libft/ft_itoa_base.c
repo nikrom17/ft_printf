@@ -6,13 +6,13 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 20:09:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/20 19:42:48 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/20 20:15:41 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	helper(int nb, char *res, int base, int len)
+void	helper(long long int nb, char *res, int base, int len)
 {
 	long long int		i;
 	int					temp;
