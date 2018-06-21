@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 14:55:55 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 14:58:00 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ void		reset_struct(t_struct *flags)
 
 void		free_struct(t_struct *flags)
 {
+	free(flags->hash);
 	free(flags); 
 }
 
