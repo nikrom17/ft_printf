@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 19:33:46 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 20:12:19 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void		convert_nums(char *input_string, int i, t_struct *flags)
 void		find_conversion_specifier
 	(char *input_string, int i, t_struct *flags)
 {
-	if (table_index[flags->type - 32] < 16)
+	if (table_index[flags->type - 32] < 17)
 		convert_nums(input_string, i, flags);
-	else if (table_index[flags->type - 32] == 17)
+	else if (table_index[flags->type - 32] == 18)
 		flags->str_args = ft_strdup("%");
-	else if (table_index[flags->type - 32] > 17)
+	else if (table_index[flags->type - 32] > 18)
 		flags->c = va_arg(flags->args, int);
 	else if (flags->type == 'S' || (flags->type == 's'
 		&& flags->size_modifier == 'l'))
@@ -57,7 +57,7 @@ int			handle_perc(char *input_string, int i, t_struct *flags)
 	flag = 1;
 	while (flag)
 	{
-		if ((ti = table_index[input_string[i] - 32]) > 10)
+		if ((ti = table_index[input_string[i] - 32]) > 11)
 			flag = 0;
 		jump_table[ti](input_string, i++, flags);
 	}
@@ -95,7 +95,7 @@ void		cancel_conflicts(char *input_string, int i, t_struct *flags)
 
 void		populate_struct(char *input_string, int i, t_struct *flags)
 {
-	while (table_index[input_string[++i] - 32] < 11)
+	while (table_index[input_string[++i] - 32] < 12)
 	{
 		if (input_string[i] == '.')
 			flags->precision = ft_atoi(&input_string[i + 1]);
