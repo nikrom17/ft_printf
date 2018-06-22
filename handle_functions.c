@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 19:26:23 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 19:33:48 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,14 +173,6 @@ void	handle_percent(char *input_string, int i, t_struct *flags)
 	ft_putstr(flags->str_args);
 }
 
-void	handle_minus(char *input_string, int i, t_struct *flags)
-{
-}
-
-void	handle_zero(char *input_string, int i, t_struct *flags)
-{
-}
-
 void	handle_space(char *input_string, int i, t_struct *flags)
 {
 	char	*temp;
@@ -238,14 +230,6 @@ void	handle_hash(char *input_string, int i, t_struct *flags)
 		else
 			handle_hash_helper(input_string, i, flags);
 	}
-}
-
-void	handle_backslash(char *input_string, int i, t_struct *flags)
-{
-}
-
-void	handle_asterisk(char *input_string, int i, t_struct *flags)
-{
 }
 
 void	handle_h(char *input_string, int i, t_struct *flags)
@@ -371,10 +355,6 @@ void	handle_hex(char *input_string, int i, t_struct *flags)
 	}
 	flags->chars_printed += ft_strlen(flags->str_args);
 	ft_putstr(flags->str_args);
-}
-
-void	handle_float(char *input_string, int i, t_struct *flags)
-{
 }
 
 void	handle_character(char *input_string, int i, t_struct *flags)
