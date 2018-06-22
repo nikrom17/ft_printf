@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/22 09:35:21 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/22 10:18:28 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	handle_precision_helper(char *input_string, int i, t_struct *flags)
 			str_cpy = ft_strjoin(flags->hash, str_cpy);
 		temp = ft_strjoin(str_cpy, flags->str_args);
 		free(flags->str_args);
+		free(str_cpy);
 		flags->str_args = temp;
 	}
 }
