@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 17:14:00 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 19:26:23 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 	int		len;
 	char	fill;
 	char	*temp;
-
+	
+	if (!flags->str_args)
+		flags->str_args = ft_strnew(1, 0);
 	if (!flags->flag)
 	{
 		flags->flag = 1;
@@ -382,11 +384,21 @@ void	handle_character(char *input_string, int i, t_struct *flags)
 
 	if (flags->str_args)
 	{
+		if (flags->minus == '1')
+			ft_putchar(flags->c);
 		len = ft_strlen(flags->str_args);
+		len--;
 		j = -1;
-		flags->chars_printed += len;
+		flags->chars_printed += (len + 1);
 		while (++j < len)
 			ft_putchar(flags->str_args[j]);
+		if (flags->minus == '0')
+			ft_putchar(flags->c);
+	}
+	else
+	{
+		flags->chars_printed += 1;
+		ft_putchar(flags->c);
 	}
 }
 

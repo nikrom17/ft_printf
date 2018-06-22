@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 16:46:14 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 19:16:07 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ void		find_conversion_specifier
 	else if (table_index[flags->type - 32] == 21)
 		flags->str_args = ft_strdup("%");
 	else if (table_index[flags->type - 32] > 21)
-		flags->str_args = ft_strnew(1, va_arg(flags->args, int));
+		flags->c = va_arg(flags->args, int);
 	else if (flags->type == 'S' || (flags->type == 's'
 		&& flags->size_modifier == 'l'))
 	{
 		flags->str_wide = va_arg(flags->args, wchar_t *);
 		flags->type = 'S';
 	}
-	else
+else
 		flags->str_args = ft_strdup(va_arg(flags->args, char *));
 	if (flags->str_args == NULL && flags->type != 'c')
 		flags->str_args = ft_strdup("(null)");
