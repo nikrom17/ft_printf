@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/22 08:59:30 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/22 09:35:06 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	handle_width_helper(char fill, int len, t_struct *flags)
 	char	*str;
 
 	if (flags->width > flags->precision &&
-		table_index[flags->type - 32] < 20
+		g_table_index[flags->type - 32] < 20
 			&& flags->zero == '1' && flags->precision >= 0)
 		fill = ' ';
 	str = ft_strnew(flags->width, fill);

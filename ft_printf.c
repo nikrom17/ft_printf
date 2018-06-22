@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 20:57:23 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/22 09:36:54 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void		convert_nums(char *input_string, int i, t_struct *flags)
 {
 	if (flags->size_modifier != '0')
-		jump_table[table_index
+		g_jump_table[g_table_index
 			[flags->size_modifier - 32]](input_string, i, flags);
 	else if (flags->type == 'd' || flags->type == 'i')
 		flags->str_args = ft_itoa_base(va_arg(flags->args, int), flags->base);
@@ -31,11 +31,11 @@ void		convert_nums(char *input_string, int i, t_struct *flags)
 void		find_conversion_specifier
 	(char *input_string, int i, t_struct *flags)
 {
-	if (table_index[flags->type - 32] < 17)
+	if (g_table_index[flags->type - 32] < 17)
 		convert_nums(input_string, i, flags);
-	else if (table_index[flags->type - 32] == 18)
+	else if (g_table_index[flags->type - 32] == 18)
 		flags->str_args = ft_strdup("%");
-	else if (table_index[flags->type - 32] > 18)
+	else if (g_table_index[flags->type - 32] > 18)
 		flags->c = va_arg(flags->args, int);
 	else if (flags->type == 'S' || (flags->type == 's'
 		&& flags->size_modifier == 'l'))
@@ -57,9 +57,9 @@ int			handle_perc(char *input_string, int i, t_struct *flags)
 	flag = 1;
 	while (flag)
 	{
-		if ((ti = table_index[input_string[i] - 32]) > 11)
+		if ((ti = g_table_index[input_string[i] - 32]) > 11)
 			flag = 0;
-		jump_table[ti](input_string, i++, flags);
+		g_jump_table[ti](input_string, i++, flags);
 	}
 	reset_struct(flags);
 	return (i - 1);
