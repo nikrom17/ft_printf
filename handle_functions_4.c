@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/22 08:59:16 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/22 08:59:54 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,3 @@ void	handle_plus(char *input_string, int i, t_struct *flags)
 void	pass(char *input_string, int i, t_struct *flags)
 {
 }
-
