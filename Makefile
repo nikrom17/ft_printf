@@ -6,7 +6,7 @@
 #    By: nroman <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/26 12:48:11 by nroman            #+#    #+#              #
-#    Updated: 2018/06/17 20:19:05 by nroman           ###   ########.fr        #
+#    Updated: 2018/06/21 21:03:39 by nroman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,12 @@ FLAGS = -Wall -Werror -c
 OPTION = -I $(HEADERS) -g
 LIBFT = -L libft/ -lftprintf
 DEPENDENCY = 	ft_printf.c \
-				handle_functions.c
+				handle_functions.c \
+				handle_functions_1.c \
+				handle_functions_2.c \
+				handle_functions_3.c \
+				handle_functions_4.c \
+				structure_fuctions.c
 OBJ = *.o
 
 all: $(NAME)
@@ -35,7 +40,5 @@ clean:
 
 fclean:
 	rm -f $(OBJ) $(NAME) libft/$(OBJ) libft/libft.a
-
-
 
 re: fclean all

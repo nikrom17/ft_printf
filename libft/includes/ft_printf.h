@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 11:59:56 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 20:26:35 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 21:06:10 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,33 +67,34 @@ static const int table_index[] =
              0
 };
 
-int		ft_printf(char *input_string, ...);
-void	convert_nums(char *input_string, int i, t_struct *flags);
-int		handle_perc(char *input_string, int i, t_struct *flags);
-void	reset_struct(t_struct *flags);
-void	find_conversion_specifier(char *input_string, int i, t_struct *flags);
-void	handle_space(char *input_string, int i, t_struct *flags);
-void	handle_percent(char *input_string, int i, t_struct *flags);
-void	handle_plus(char *input_string, int i, t_struct *flags);
-void	handle_hash(char *input_string, int i, t_struct *flags);   
-void	handle_width(char *input_string, int i, t_struct *flags);
-void	handle_precision(char *input_string, int i, t_struct *flags);
-void	handle_hh(char *input_string, int i, t_struct *flags);
-void	handle_h(char *input_string, int i, t_struct *flags);
-void	handle_l(char *input_string, int i, t_struct *flags);
-void	handle_ll(char *input_string, int i, t_struct *flags);
-void	handle_j(char *input_string, int i, t_struct *flags);
-void	handle_z(char *input_string, int i, t_struct *flags);
-void	handle_integer(char *input_string, int i, t_struct *flags);
-void	handle_unsigned(char *input_string, int i, t_struct *flags);
-void	handle_octal(char *input_string, int i, t_struct *flags);
-void	handle_hex(char *input_string, int i, t_struct *flags);
-void	handle_character(char *input_string, int i, t_struct *flags);
-void	handle_string(char *input_string, int i, t_struct *flags);
-void	handle_pointer(char *input_string, int i, t_struct *flags);
-void	handle_wcharacter(char *input_string, int i, t_struct *flags);
-void	pass(char *input_string, int i, t_struct *flags);
-
+int			ft_printf(char *input_string, ...);
+void		convert_nums(char *input_string, int i, t_struct *flags);
+int			handle_perc(char *input_string, int i, t_struct *flags);
+void		reset_struct(t_struct *flags);
+void		find_conversion_specifier(char *input_string, int i, t_struct *flags);
+void		handle_space(char *input_string, int i, t_struct *flags);
+void		handle_percent(char *input_string, int i, t_struct *flags);
+void		handle_plus(char *input_string, int i, t_struct *flags);
+void		handle_hash(char *input_string, int i, t_struct *flags);   
+void		handle_width(char *input_string, int i, t_struct *flags);
+void		handle_precision(char *input_string, int i, t_struct *flags);
+void		handle_hh(char *input_string, int i, t_struct *flags);
+void		handle_h(char *input_string, int i, t_struct *flags);
+void		handle_l(char *input_string, int i, t_struct *flags);
+void		handle_ll(char *input_string, int i, t_struct *flags);
+void		handle_j(char *input_string, int i, t_struct *flags);
+void		handle_z(char *input_string, int i, t_struct *flags);
+void		handle_integer(char *input_string, int i, t_struct *flags);
+void		handle_unsigned(char *input_string, int i, t_struct *flags);
+void		handle_octal(char *input_string, int i, t_struct *flags);
+void		handle_hex(char *input_string, int i, t_struct *flags);
+void		handle_character(char *input_string, int i, t_struct *flags);
+void		handle_string(char *input_string, int i, t_struct *flags);
+void		handle_pointer(char *input_string, int i, t_struct *flags);
+void		handle_wcharacter(char *input_string, int i, t_struct *flags);
+void		pass(char *input_string, int i, t_struct *flags);
+t_struct	*init_struct(void);
+void		populate_struct(char *input_string, int i, t_struct *flags);
 static const create_j_table jump_table[25] =
 {
 	pass,
