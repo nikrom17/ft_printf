@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 19:33:48 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 19:47:12 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,3 +400,8 @@ void	handle_wcharacter(char *input_string, int i, t_struct *flags)
 	flags->chars_printed += 1;
 	ft_putchar(flags->c);
 }
+
+void	pass(char *input_string, int i, t_struct *flags)
+{
+}
+
