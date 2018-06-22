@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 16:01:23 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 16:59:10 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	handle_precision(char *input_string, int i, t_struct *flags)
 	char	*str_cpy;
 
 	if (flags->type == 's')
-	{
+	{	
 		if (flags->precision < ft_strlen(flags->str_args))
 		{
 			str_cpy = ft_strdup(flags->str_args);
@@ -162,14 +162,13 @@ void	handle_plus(char *input_string, int i, t_struct *flags)
 			plus = ft_strnew(1, '+');
 			flags->str_args = ft_strjoin(plus, flags->str_args);
 		}
-
 	}
 }
 
 void	handle_percent(char *input_string, int i, t_struct *flags)
 {
-	flags->chars_printed++;
-	ft_putchar(flags->c);
+	flags->chars_printed += ft_strlen(flags->str_args);
+	ft_putstr(flags->str_args);
 }
 
 void	handle_minus(char *input_string, int i, t_struct *flags)
@@ -312,7 +311,6 @@ void	handle_ll(char *input_string, int i, t_struct *flags)
 
 void	handle_j(char *input_string, int i, t_struct *flags)
 {
-
 	if (flags->size_modifier == 'j')
 	{
 		flags->size_modifier = 'J';
@@ -385,21 +383,10 @@ void	handle_character(char *input_string, int i, t_struct *flags)
 	if (flags->str_args)
 	{
 		len = ft_strlen(flags->str_args);
-		len--;
 		j = -1;
-		if (flags->minus == '1')
-		{
-			flags->chars_printed += 1;
-			ft_putchar(flags->c);
-		}
 		flags->chars_printed += len;
 		while (++j < len)
 			ft_putchar(flags->str_args[j]);
-	}
-	if (flags->minus == '0')
-	{
-		flags->chars_printed += 1;
-		ft_putchar(flags->c);
 	}
 }
 

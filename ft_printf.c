@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 19:07:33 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 15:45:23 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/21 16:46:14 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void		find_conversion_specifier
 	if (table_index[flags->type - 32] < 20)
 		convert_nums(input_string, i, flags);
 	else if (table_index[flags->type - 32] == 21)
-		flags->c = '%';
+		flags->str_args = ft_strdup("%");
 	else if (table_index[flags->type - 32] > 21)
-		flags->c = va_arg(flags->args, int);
+		flags->str_args = ft_strnew(1, va_arg(flags->args, int));
 	else if (flags->type == 'S' || (flags->type == 's'
 		&& flags->size_modifier == 'l'))
 	{
@@ -44,7 +44,7 @@ void		find_conversion_specifier
 		flags->type = 'S';
 	}
 	else
-		flags->str_args = va_arg(flags->args, char *);
+		flags->str_args = ft_strdup(va_arg(flags->args, char *));
 	if (flags->str_args == NULL && flags->type != 'c')
 		flags->str_args = ft_strdup("(null)");
 }
@@ -85,6 +85,14 @@ void		pop_struct_helper(char *input_string, int i, t_struct *flags)
 	}
 }
 
+void		cancel_conflicts(char *input_string, int i, t_struct *flags)
+{
+	if (flags->plus == '1' && flags->space == '1')
+		flags->space = '0';
+	if (flags->zero == '1' && flags->minus == '1')
+		flags->zero = '0';
+}
+
 void		populate_struct(char *input_string, int i, t_struct *flags)
 {
 	while (table_index[input_string[++i] - 32] < 15)
@@ -104,15 +112,10 @@ void		populate_struct(char *input_string, int i, t_struct *flags)
 			flags->minus = '1';
 	}
 	pop_struct_helper(input_string, i, flags);
+	cancel_conflicts(input_string, i, flags);
 }
 
-void		cancel_conflicts(char *input_string, int i, t_struct *flags)
-{
-	if (flags->plus == '1' && flags->space == '1')
-		flags->space = '0';
-	if (flags->zero == '1' && flags->minus == '1')
-		flags->zero = '0';
-}
+
 
 void		reset_struct(t_struct *flags)
 {
@@ -137,7 +140,7 @@ void		free_struct(t_struct *flags)
 {
 	if (flags->str_args)
 		free(flags->str_args);
-	free(flags); 
+	free(flags);
 }
 
 t_struct	*init_struct(void)
@@ -178,7 +181,6 @@ int			ft_printf(char *input_string, ...)
 		if (input_string[i] == '%')
 		{
 			populate_struct(input_string, i, flags);
-			cancel_conflicts(input_string, i, flags);
 			find_conversion_specifier(input_string, i, flags);
 			i = handle_perc(input_string, ++i, flags);
 		}
