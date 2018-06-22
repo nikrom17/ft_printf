@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/21 21:05:44 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/22 08:59:16 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,26 @@ void	handle_wcharacter(char *input_string, int i, t_struct *flags)
 {
 	flags->chars_printed += 1;
 	ft_putchar(flags->c);
+}
+
+void	handle_plus(char *input_string, int i, t_struct *flags)
+{
+	char	*plus;
+
+	if (flags->plus == '1' && flags->neg == '0')
+	{
+		flags->plus = '2';
+		if (flags->zero == '1')
+		{
+			plus = ft_strnew(1, '+');
+			flags->hash = plus;
+		}
+		else
+		{
+			plus = ft_strnew(1, '+');
+			flags->str_args = ft_strjoin(plus, flags->str_args);
+		}
+	}
 }
 
 void	pass(char *input_string, int i, t_struct *flags)

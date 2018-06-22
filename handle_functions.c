@@ -6,7 +6,7 @@
 /*   By: nroman <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 16:39:35 by nroman            #+#    #+#             */
-/*   Updated: 2018/06/22 08:56:22 by nroman           ###   ########.fr       */
+/*   Updated: 2018/06/22 08:59:30 by nroman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ char	handle_width_helper_2(char *input_string, int i, t_struct *flags)
 	return (fill);
 }
 
-
 void	handle_width(char *input_string, int i, t_struct *flags)
 {
 	int		len;
@@ -107,26 +106,6 @@ void	handle_width(char *input_string, int i, t_struct *flags)
 			}
 			else
 				handle_width_helper(fill, len, flags);
-		}
-	}
-}
-
-void	handle_plus(char *input_string, int i, t_struct *flags)
-{
-	char	*plus;
-
-	if (flags->plus == '1' && flags->neg == '0')
-	{
-		flags->plus = '2';
-		if (flags->zero == '1')
-		{
-			plus = ft_strnew(1, '+');
-			flags->hash = plus;
-		}
-		else
-		{
-			plus = ft_strnew(1, '+');
-			flags->str_args = ft_strjoin(plus, flags->str_args);
 		}
 	}
 }
